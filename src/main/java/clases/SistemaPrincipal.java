@@ -33,6 +33,13 @@ public class SistemaPrincipal {
             validar=true;
         }
         
+<<<<<<< HEAD
+=======
+        mostrarMenuCliente();
+        mostrarMenuVendedor();
+        
+        
+>>>>>>> 61e257dad4237b2cb4fc25f265e8fee330f17e08
         }
        
         
@@ -82,6 +89,7 @@ public class SistemaPrincipal {
      }
          
     }
+<<<<<<< HEAD
     private static usuario Crear_usuario(String nombrearchivo){
         File archivo = null;
      FileReader fr = null;
@@ -125,6 +133,25 @@ public class SistemaPrincipal {
         
     }
             
+=======
+    
+    public static void mostrarMenuCliente(){
+        System.out.println("/********MENÚ********/");
+        System.out.println("/*                  */");
+        System.out.println("/********************/");
+        System.out.println("1. Solicitar servicio de taxi");
+        System.out.println("2. Solicitar servicio de comida");
+        System.out.println("3. Solicitar entrega encomienda");
+        System.out.println("4. Consultar servicios");
+    }
+    
+    public static void mostrarMenuVendedor(){
+        System.out.println("/********MENÚ********/");
+        System.out.println("/*                  */");
+        System.out.println("/********************/");
+        System.out.println("1. Consultar servicio asignado");
+    }
+>>>>>>> 61e257dad4237b2cb4fc25f265e8fee330f17e08
   
     
 }
