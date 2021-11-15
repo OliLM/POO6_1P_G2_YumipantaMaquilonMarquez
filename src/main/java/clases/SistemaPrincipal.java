@@ -32,14 +32,12 @@ public class SistemaPrincipal {
             System.out.println("Bienvenido al sistema");
             validar=true;
         }
+        System.out.println("nueva linea codigo prueba");
         
-<<<<<<< HEAD
-=======
+
         mostrarMenuCliente();
         mostrarMenuVendedor();
         
-        
->>>>>>> 61e257dad4237b2cb4fc25f265e8fee330f17e08
         }
        
         
@@ -89,7 +87,6 @@ public class SistemaPrincipal {
      }
          
     }
-<<<<<<< HEAD
     private static usuario Crear_usuario(String nombrearchivo){
         File archivo = null;
      FileReader fr = null;
@@ -131,10 +128,7 @@ public class SistemaPrincipal {
         return null;
         
         
-    }
-            
-=======
-    
+    }  
     public static void mostrarMenuCliente(){
         System.out.println("/********MENÚ********/");
         System.out.println("/*                  */");
@@ -151,7 +145,7 @@ public class SistemaPrincipal {
         System.out.println("/********************/");
         System.out.println("1. Consultar servicio asignado");
     }
->>>>>>> 61e257dad4237b2cb4fc25f265e8fee330f17e08
+
   
     
 }
