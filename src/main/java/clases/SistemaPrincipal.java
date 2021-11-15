@@ -32,7 +32,9 @@ public class SistemaPrincipal {
             System.out.println("Bienvenido al sistema");
             validar=true;
         }
+        
         }
+       
         
     }
     public static boolean validardatos(String datos){
@@ -80,6 +82,49 @@ public class SistemaPrincipal {
      }
          
     }
+    private static usuario Crear_usuario(String nombrearchivo){
+        File archivo = null;
+     FileReader fr = null;
+    BufferedReader br = null;
+     String linea;
+     String Encabezado;
+     try {
+         archivo=new File(nombrearchivo);
+         fr= new FileReader(archivo,StandardCharsets.UTF_8);
+         br=new BufferedReader(fr);
+         Encabezado=br.readLine();
+        while ((linea = br.readLine()) != null )  {
+           String []datos;
+           datos=linea.split(",");
+           String cedula=datos[0];
+            String Nombre=datos[1];
+             String Apellido=datos[2];
+           String usuario=datos[3];
+           String contra=datos[4];
+           String telefono =datos[5];
+            String tipo=datos[6];
+            char t=tipo.charAt(0);
+           
+           
+         }    
+     }catch(Exception e){
+         e.printStackTrace();
+     }
+     finally {
+            
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        return null;
+        
+        
+    }
+            
   
     
 }

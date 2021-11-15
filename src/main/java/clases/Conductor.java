@@ -13,8 +13,8 @@ public class Conductor extends usuario {
     private EstadoConductor estado;
     private TipoVehiculo vehiculo;
     
-    public Conductor(String nombre, String apellido, String nro_cedula, String celular, String usuario, String contraseña, String licencia, EstadoConductor estado, TipoVehiculo vehiculo){
-        super(nombre,apellido,nro_cedula,celular,usuario,contraseña);
+    public Conductor(String nombre, String apellido, String nro_cedula, String celular, String usuario, String contraseña, String licencia, EstadoConductor estado, TipoVehiculo vehiculo, char tipo){
+        super(nombre,apellido,nro_cedula,celular,usuario,contraseña,tipo);
         this.licencia= licencia;
         this.estado= estado;
         this.vehiculo= vehiculo;

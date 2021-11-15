@@ -12,14 +12,17 @@ public class usuario {
    protected  String nombre,apellido;
    protected  String nro_cedula, celular;
    protected String usuario,contraseña;
+   protected char tipo;
    
-   public usuario(String nombre, String apellido, String nro_cedula, String celular, String usuario, String contraseña){
+   public usuario(String nombre, String apellido, String nro_cedula, String celular, String usuario, String contraseña, char tipo){
        this.nombre= nombre;
        this.apellido= apellido;
        this.nro_cedula= nro_cedula;
        this.celular= celular;
        this.usuario= usuario;
        this.contraseña= contraseña;
+       this.tipo=tipo;
+       
        
    }
 

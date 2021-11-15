@@ -12,8 +12,8 @@ public class Cliente extends usuario{
     private int edad;
     private int nro_tarjeta;
     
-    public Cliente(String nombre, String apellido, String nro_cedula, String celular, String usuario, String contraseña, int edad, int nro_tarjeta){
-         super(nombre,apellido,nro_cedula,celular,usuario,contraseña);
+    public Cliente(String nombre, String apellido, String nro_cedula, String celular, String usuario, String contraseña, int edad, int nro_tarjeta,char tipo){
+         super(nombre,apellido,nro_cedula,celular,usuario,contraseña,tipo);
          this.edad= edad;
          this.nro_tarjeta= nro_tarjeta;
     }
