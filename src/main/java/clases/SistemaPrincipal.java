@@ -32,6 +32,11 @@ public class SistemaPrincipal {
             System.out.println("Bienvenido al sistema");
             validar=true;
         }
+        
+        mostrarMenuCliente();
+        mostrarMenuVendedor();
+        
+        
         }
         
     }
@@ -79,6 +84,23 @@ public class SistemaPrincipal {
          return false;
      }
          
+    }
+    
+    public static void mostrarMenuCliente(){
+        System.out.println("/********MENÚ********/");
+        System.out.println("/*                  */");
+        System.out.println("/********************/");
+        System.out.println("1. Solicitar servicio de taxi");
+        System.out.println("2. Solicitar servicio de comida");
+        System.out.println("3. Solicitar entrega encomienda");
+        System.out.println("4. Consultar servicios");
+    }
+    
+    public static void mostrarMenuVendedor(){
+        System.out.println("/********MENÚ********/");
+        System.out.println("/*                  */");
+        System.out.println("/********************/");
+        System.out.println("1. Consultar servicio asignado");
     }
   
     
