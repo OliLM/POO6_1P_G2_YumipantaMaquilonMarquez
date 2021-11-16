@@ -16,8 +16,8 @@ public class Servicio {
     protected int valorPagar;
     protected int numeroServicio;
     
-    public Servicio(String puntoPartida,String puntoLlegada,String fecha,int valorPagar){
-        this.ruta=new Ruta(puntoPartida,puntoLlegada);
+    public Servicio(Ruta ruta,String fecha,int valorPagar){
+        this.ruta=ruta;
         this.fecha=fecha;
         this.valorPagar=valorPagar;
                 
@@ -27,6 +27,20 @@ public class Servicio {
     }
     public void setfecha(String fecha){
      this.fecha=fecha;
+    }
+    
+    public void setConductor(Conductor c){
+        this.conductor= c;
+    }
+    public Conductor getConductor(){
+        return conductor;
+    }
+    
+    public void setRuta(Ruta r){
+        this.ruta=r;
+    }
+    public Ruta getRuta(){
+        return ruta;
     }
     
     public int getvalorPagar(){
