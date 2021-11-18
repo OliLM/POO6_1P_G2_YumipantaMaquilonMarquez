@@ -14,12 +14,13 @@ public class Servicio {
     protected Conductor conductor;
     protected String fecha;
     protected int valorPagar;
-    protected int numeroServicio;
+    protected String codigo;
     
-    public Servicio(Ruta ruta,String fecha,int valorPagar){
-        this.ruta=ruta;
+    public Servicio(String partida,String llegada,String fecha){
+        this.ruta=new Ruta(partida,llegada);
         this.fecha=fecha;
         this.valorPagar=valorPagar;
+        this.codigo=String.valueOf((int)(Math.random()*1000000));
                 
     }
     public String getfecha(){
@@ -28,19 +29,17 @@ public class Servicio {
     public void setfecha(String fecha){
      this.fecha=fecha;
     }
-    
-    public void setConductor(Conductor c){
-        this.conductor= c;
-    }
     public Conductor getConductor(){
         return conductor;
     }
-    
-    public void setRuta(Ruta r){
-        this.ruta=r;
+    public void setConductor(Conductor c){
+        this.conductor= c;
     }
     public Ruta getRuta(){
         return ruta;
+    }
+    public void setRuta(String partida,String llegada){
+        this.ruta=new Ruta(partida,llegada);
     }
     
     public int getvalorPagar(){

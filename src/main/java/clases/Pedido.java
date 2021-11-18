@@ -13,8 +13,8 @@ public class Pedido {
     protected String codigo;
     protected String nombre;
     
-    public Pedido(String codigo,String nombre){
-        this.codigo=codigo;
+    public Pedido(String nombre){
+        this.codigo=String.valueOf((int)(Math.random()*1000000));;
         this.nombre=nombre;
     }
     

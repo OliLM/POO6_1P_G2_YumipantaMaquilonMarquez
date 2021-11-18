@@ -13,8 +13,8 @@ public class ServicioTaxi extends Servicio{
     private int cantidadPersonas;
     
     //constructor
-    public ServicioTaxi(Ruta ruta,String fecha,int valorPagar,int cantidadPersonas){
-        super(ruta,fecha,valorPagar);
+    public ServicioTaxi(String partida,String llegada,String fecha,int cantidadPersonas){
+        super(partida,llegada,fecha);
         this.cantidadPersonas=cantidadPersonas;
     }
     

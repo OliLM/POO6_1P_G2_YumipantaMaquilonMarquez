@@ -12,9 +12,9 @@ package clases;
 public class ServicioDelivery extends Servicio{
     private Pedido pedido;
     
-    public ServicioDelivery(String puntoPartida,String puntoLlegada,String fecha,int valorPagar,String codigo,String nombre){
-        super(puntoPartida,puntoLlegada,fecha,valorPagar);
-        this.pedido=new Pedido(codigo,nombre);
+    public ServicioDelivery(String puntoPartida,String puntoLlegada,String fecha,String codigo,String nombre){
+        super(puntoPartida,puntoLlegada,fecha);
+        this.pedido=new Pedido(nombre);
     }
     
 }

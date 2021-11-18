@@ -13,8 +13,8 @@ public class EntregaEncomiendas extends Servicio {
     private int cantidadProductos;
     private String tipoEncomienda;
     
-    public EntregaEncomiendas(String puntoPartida,String puntoLlegada,String fecha,int valorPagar,int cantidadProductos,String tipoEncomienda){
-        super(puntoPartida,puntoLlegada,fecha,valorPagar);
+    public EntregaEncomiendas(String Partida,String Llegada,String fecha,int cantidadProductos,String tipoEncomienda){
+        super(Partida,Llegada,fecha);
         this.cantidadProductos=cantidadProductos;
         this.tipoEncomienda=tipoEncomienda;
     }
