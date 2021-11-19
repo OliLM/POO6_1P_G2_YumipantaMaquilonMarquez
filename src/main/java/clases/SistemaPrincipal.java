@@ -23,7 +23,7 @@ public class SistemaPrincipal {
         boolean validar = false;
         Scanner sc = new Scanner(System.in);
         System.out.println("Inicio del sistema");
-<<<<<<< HEAD
+
         while(validar==false){ //se pone un ciclo para que cuando ponga mal los datos ingrese denuevo
         System.out.println("Ingrese el usuario y contraseña");
         System.out.println("usuario: ");
@@ -119,76 +119,8 @@ public class SistemaPrincipal {
 
         }
         
-        /*
-=======
-        while (validar == false) { //se pone un ciclo para que cuando ponga mal los datos ingrese denuevo
-            System.out.println("Ingrese el usuario y contraseña");
-            System.out.println("usuario: ");
-            String Usuario = sc.nextLine();
-            System.out.println("Contraseña: ");
-            String Contraseña = sc.nextLine();
-            if (IngresoSistema(Usuario.toLowerCase(), Contraseña.toLowerCase(), "usuarios.txt") == false || validardatos(Usuario) == false) {
-                System.out.println("credenciales no validas");
-            } else {
-                System.out.println("Bienvenido al sistema");
-                validar = true;
+      
 
-                usuario User = Crear_usuario("usuarios.txt", Usuario);
-                if (User.getTipo() == 'C') {
-                    Cliente cliente_A = (Cliente) User;
-                    mostrarMenuCliente();
-                    System.out.print("Ingrese su opcion: ");
-                    int op = sc.nextInt();
-                    sc.nextLine();
-                    switch (op) {
-                        case 1:
-                            System.out.println("/********SERVICIO TAXI********/");
-                            crearServicioTaxi();
-
-                            break;
-                        case 2:
-                            System.out.println("/********SERVICIO ENCOMIENDAS********/");
-                            crearServicioEncomienda();
-
-                            break;
-                        case 3:
-                            System.out.println("/********SERVICIO DELIVERY COMIDA********/");
-                            crearServicioDelivery();
-
-                            break;
-                        case 4:
-                            System.out.println("/********CONSULTAR SERVICIO********/");
-                            cliente_A.ConsultarServicioAsignado();
-                            break;
-                        default:
-                            System.out.print("Se cerró el menú");
-                    }
-
-                } else {
-                    Conductor conductor_A = (Conductor) User;
-                    mostrarMenuConductor();
-                    System.out.print("Ingrese su opcion: ");
-                    int op = sc.nextInt();
-                    sc.nextLine();
-                    switch (op) {
-                        case 1:
-                            System.out.println("/********CONSULTAR SERVICIO********/");
-                            conductor_A.ConsultarServicioAsignado();
-                            break;
-                        default:
-                            System.out.print("Se cerró el menú");
-                    }
-                }
-<<<<<<< HEAD
-                /*
->>>>>>> 17d699e9501677fb68af7003fd436dbf2fb74bb0
-        System.out.println("nueva linea codigo prueba");
-        mostrarMenuCliente();
-        mostrarMenuVendedor();
-                 */
-=======
-
->>>>>>> aba3b2c680da5ef19166e13afe56083223db227a
             }
         }
     }
@@ -238,36 +170,6 @@ public class SistemaPrincipal {
         }
 
     }
-<<<<<<< HEAD
-    private static usuario Crear_usuario(String nombrearchivo,String User){
-    File archivo = null;
-    FileReader fr = null;
-    BufferedReader br = null;
-     String linea;
-     String Encabezado;
-       usuario user_final=new usuario();
-     try {
-       
-         archivo=new File(nombrearchivo);
-         fr= new FileReader(archivo,StandardCharsets.UTF_8);
-         br=new BufferedReader(fr);
-         Encabezado=br.readLine();
-        while ((linea = br.readLine()) != null )  {
-           String []datos;
-           datos=linea.split(",");
-         if(User.equals(datos[3])){         
-            usuario user_t= new usuario(datos[1], datos[2], datos[0], datos[5], datos[3],datos[4],datos[6].charAt(0));
-            user_final=user_t;
-         }
-      
-         }    
-     }catch(Exception e){
-         e.printStackTrace();
-     }
-     finally {
-            
-=======
-
     private static usuario Crear_usuario(String nombrearchivo, String User) {
         File archivo = null;
         FileReader fr = null;
@@ -294,7 +196,6 @@ public class SistemaPrincipal {
             e.printStackTrace();
         } finally {
 
->>>>>>> 17d699e9501677fb68af7003fd436dbf2fb74bb0
             try {
                 if (null != fr) {
                     fr.close();
@@ -315,19 +216,15 @@ public class SistemaPrincipal {
         System.out.println("2. Solicitar servicio de comida");
         System.out.println("3. Solicitar entrega encomienda");
         System.out.println("4. Consultar servicios");
-<<<<<<< HEAD
     } 
-    public static void mostrarMenuConductor(){
-=======
-    }
+   
 
+    
     public static void mostrarMenuConductor() {
->>>>>>> 17d699e9501677fb68af7003fd436dbf2fb74bb0
         System.out.println("/********MENÚ********/");
         System.out.println("/*                  */");
         System.out.println("/********************/");
         System.out.println("1. Consultar servicio asignado");
-<<<<<<< HEAD
     }  
     private static boolean validarcliente(String Nombrearchivo,usuario usuario){ 
     FileReader fr = null;
@@ -365,15 +262,6 @@ public class SistemaPrincipal {
      }
     return valor;
             }
-    
-    
-}
-=======
-    }
-    public static void ResgistarClientes(String Nombrearchivo) {
-
-    }
-
     public ArrayList<Plato> crearMenu(String nombreArchivo, Restaurante restaurante) {
         File archivo = null;
         FileReader fr = null;
@@ -416,4 +304,3 @@ public class SistemaPrincipal {
     }
 
 }
->>>>>>> 17d699e9501677fb68af7003fd436dbf2fb74bb0
