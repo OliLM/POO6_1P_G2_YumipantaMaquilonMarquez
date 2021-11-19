@@ -30,14 +30,14 @@ public class SistemaPrincipal {
           
         }else{
             System.out.println("Bienvenido al sistema");
-            validar=true;
+            validar=true; 
+            System.out.print(Crear_usuario("usuarios.txt",Usuario));
         }
+        /*
         System.out.println("nueva linea codigo prueba");
-        
-
         mostrarMenuCliente();
         mostrarMenuVendedor();
-        
+        */
         }
        
         
@@ -64,7 +64,8 @@ public class SistemaPrincipal {
            String contra=datos[4]; 
            if(usuario.equals(user) && contraseña.equals(contra)){
             encontrado=true; 
-           }   
+           }
+          
          }    
      }catch(Exception e){
          e.printStackTrace();
@@ -87,13 +88,15 @@ public class SistemaPrincipal {
      }
          
     }
-    private static usuario Crear_usuario(String nombrearchivo){
+    private static usuario Crear_usuario(String nombrearchivo,String User){
         File archivo = null;
      FileReader fr = null;
     BufferedReader br = null;
      String linea;
      String Encabezado;
+       usuario user_final=new usuario();
      try {
+       
          archivo=new File(nombrearchivo);
          fr= new FileReader(archivo,StandardCharsets.UTF_8);
          br=new BufferedReader(fr);
@@ -101,16 +104,11 @@ public class SistemaPrincipal {
         while ((linea = br.readLine()) != null )  {
            String []datos;
            datos=linea.split(",");
-           String cedula=datos[0];
-            String Nombre=datos[1];
-             String Apellido=datos[2];
-           String usuario=datos[3];
-           String contra=datos[4];
-           String telefono =datos[5];
-            String tipo=datos[6];
-            char t=tipo.charAt(0);
-           
-           
+         if(User.equals(datos[3])){         
+    usuario user_t= new usuario(datos[1], datos[2], datos[0], datos[5], datos[3],datos[4],datos[5].charAt(0));
+    user_final=user_t;
+         }
+      
          }    
      }catch(Exception e){
          e.printStackTrace();
@@ -125,7 +123,7 @@ public class SistemaPrincipal {
                 e2.printStackTrace();
             }
         }
-        return null;
+        return user_final;
         
         
     }  

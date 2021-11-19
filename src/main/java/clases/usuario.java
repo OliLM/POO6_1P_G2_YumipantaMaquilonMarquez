@@ -25,6 +25,9 @@ public class usuario {
        
        
    }
+   public usuario(){
+       
+   }
 
     public String getNombre() {
         return nombre;
