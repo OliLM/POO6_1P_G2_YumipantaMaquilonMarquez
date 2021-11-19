@@ -30,8 +30,8 @@ public class SistemaPrincipal {
             System.out.println("Bienvenido al sistema");
             validar=true; 
             usuario User=Crear_usuario("usuarios.txt",Usuario);
-            System.out.print(User);
         }
+        
         /*
         System.out.println("nueva linea codigo prueba");
         mostrarMenuCliente();
@@ -86,8 +86,8 @@ public class SistemaPrincipal {
          
     }
     private static usuario Crear_usuario(String nombrearchivo,String User){
-        File archivo = null;
-     FileReader fr = null;
+    File archivo = null;
+    FileReader fr = null;
     BufferedReader br = null;
      String linea;
      String Encabezado;
@@ -139,7 +139,39 @@ public class SistemaPrincipal {
         System.out.println("/********************/");
         System.out.println("1. Consultar servicio asignado");
     }  
-    public static void ResgistarClientes(String Nombrearchivo){
-        
-    }
+    private static boolean validarcliente(String Nombrearchivo,usuario usuario){ 
+    FileReader fr = null;
+    BufferedReader br = null;
+     String linea;
+     String Encabezado;
+     File archivo;
+     boolean valor=true;
+     try{
+    if ((linea = br.readLine()) == null ){
+        valor=false; 
+      }
+     }catch(Exception e){
+      e.printStackTrace(); 
+     }
+      if(valor==false){       
+     try {
+         archivo=new File(Nombrearchivo);
+         fr= new FileReader(archivo,StandardCharsets.UTF_8);
+         br=new BufferedReader(fr);
+         Encabezado=br.readLine();
+        while ((linea = br.readLine()) != null )  {
+           String []datos;
+           datos=linea.split(",");
+           if(usuario.getNro_cedula().equals(datos[0])){
+              valor =true;   
+           }  
+         }    
+     }catch(Exception e){
+         e.printStackTrace();
+     }
+     
+     }
+    return valor;
+            }
+    
 }
