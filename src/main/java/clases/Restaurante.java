@@ -40,6 +40,11 @@ public class Restaurante {
         return listamenu;
     }
 
+    public void setListamenu(ArrayList<Plato> listamenu) {
+        this.listamenu = listamenu;
+    }
+    
+
     @Override
     public String toString() {
         return "Restaurante{" + "nombre=" + nombre + ", codigo=" + codigo + ", listamenu=" + listamenu + '}';
