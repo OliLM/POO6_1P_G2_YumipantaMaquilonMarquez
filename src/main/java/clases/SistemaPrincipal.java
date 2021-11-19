@@ -7,7 +7,7 @@ import java.util.Scanner;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-
+import Enums.*;
 /**
  *
  * @author ismael123
@@ -29,7 +29,89 @@ public class SistemaPrincipal {
         }else{
             System.out.println("Bienvenido al sistema");
             validar=true; 
+<<<<<<< HEAD
             usuario User=Crear_usuario("usuarios.txt",Usuario);
+=======
+
+        usuario User= Crear_usuario("usuarios.txt",Usuario);
+        if(User.getTipo()=='C'){
+            Cliente cliente_A= (Cliente)User;
+            mostrarMenuCliente();
+            System.out.print("Ingrese su opcion: ");
+            int op= sc.nextInt();
+            sc.nextLine();
+            switch(op){
+                case 1:
+                    System.out.println("/********SERVICIO TAXI********/");
+                    
+                    System.out.print("Ingrese la fecha: ");
+                    String fecha_t= sc.nextLine();
+                    System.out.print("Ingrese punto de partida: ");
+                    String p_inicio= sc.nextLine();
+                    System.out.print("Ingrese punto de llegada: ");
+                    String p_llegada= sc.nextLine();
+                    Ruta ruta_t= new Ruta(p_inicio,p_llegada);
+                    System.out.print("Ingrese la cantidad de personas que viajaran: ");
+                    int cantidad_p= sc.nextInt();
+                    sc.nextLine();
+                    Servicio Taxi= new ServicioTaxi(ruta_t,fecha_t,cantidad_p);
+                    break;
+                case 2:
+                    System.out.println("/********SERVICIO ENCOMIENDAS********/");
+     
+                    System.out.print("Ingrese la fecha: ");
+                    String fecha_e= sc.nextLine();
+                    System.out.print("Ingrese punto de partida: ");
+                    String p_inicio_e= sc.nextLine();
+                    System.out.print("Ingrese punto de llegada: ");
+                    String p_llegada_e= sc.nextLine();
+                    Ruta ruta_e= new Ruta(p_inicio_e,p_llegada_e);
+                    System.out.print("Ingrese el tipo de encomienda: ");
+                    String t_encomienda= sc.nextLine();
+                    TipoEncomienda T_e= TipoEncomienda.valueOf(t_encomienda.toUpperCase());
+                    System.out.print("Ingrese la cantidad de items que enviará: ");
+                    int cantidad_items= sc.nextInt();
+                    sc.nextLine();              
+                    Servicio Encomienda= new EntregaEncomiendas(ruta_e,fecha_e,cantidad_items,T_e);
+                    break;
+                case 3:
+                    System.out.println("/********SERVICIO DELIVERY COMIDA********/");
+                    
+                    System.out.print("Ingrese la fecha: ");
+                    String fecha_de= sc.nextLine();
+                    System.out.print("Ingrese punto de partida: ");
+                    String p_inicio_de= sc.nextLine();
+                    System.out.print("Ingrese punto de llegada: ");
+                    String p_llegada_de= sc.nextLine();
+                    Ruta ruta_de= new Ruta(p_inicio_de,p_llegada_de);
+                    System.out.print("Ingrese el pedido: "); //Falta crear el pedido como objeto, y la clase restaurante y menú
+                    
+                    Servicio Delivery= new ServicioDelivery(ruta_de, fecha_de,"1234","Williams restaurant");
+                    break;
+                case 4:
+                    System.out.println("/********CONSULTAR SERVICIO********/");
+                    cliente_A.ConsultarServicioAsignado();
+                    break;
+                default:
+                    System.out.print("Se cerró el menú");
+            }
+        
+        }
+        else{
+            Conductor conductor_A= (Conductor)User;
+            mostrarMenuConductor();
+            System.out.print("Ingrese su opcion: ");
+            int op= sc.nextInt();
+            sc.nextLine();
+            switch(op){
+                case 1:
+                  System.out.println("/********CONSULTAR SERVICIO********/");
+                  conductor_A.ConsultarServicioAsignado();
+                  break;
+                default:
+                    System.out.print("Se cerró el menú");  
+            }
+>>>>>>> 9fc62fe0060593487141a0e397ebcf7bb537981c
         }
         
         /*
@@ -38,6 +120,7 @@ public class SistemaPrincipal {
         mostrarMenuVendedor();
         */
         }        
+    }
     }
     public static boolean validardatos(String datos){
        return datos.matches("[a-zA-z]*");  
@@ -102,8 +185,8 @@ public class SistemaPrincipal {
            String []datos;
            datos=linea.split(",");
          if(User.equals(datos[3])){         
-    usuario user_t= new usuario(datos[1], datos[2], datos[0], datos[5], datos[3],datos[4],datos[5].charAt(0));
-    user_final=user_t;
+            usuario user_t= new usuario(datos[1], datos[2], datos[0], datos[5], datos[3],datos[4],datos[5].charAt(0));
+            user_final=user_t;
          }
       
          }    
@@ -133,7 +216,9 @@ public class SistemaPrincipal {
         System.out.println("3. Solicitar entrega encomienda");
         System.out.println("4. Consultar servicios");
     }
-    public static void mostrarMenuVendedor(){
+
+    
+    public static void mostrarMenuConductor(){
         System.out.println("/********MENÚ********/");
         System.out.println("/*                  */");
         System.out.println("/********************/");

@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -52,6 +53,10 @@ public class usuario {
     public String getContraseña() {
         return contraseña;
     }
+    
+    public char getTipo(){
+        return tipo;
+    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -96,3 +101,4 @@ public class usuario {
     
     
 }
+

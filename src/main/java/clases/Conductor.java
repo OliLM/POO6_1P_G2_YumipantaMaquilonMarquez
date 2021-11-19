@@ -47,9 +47,9 @@ public class Conductor extends usuario {
     
     @Override
     public void ConsultarServicioAsignado(){
-       
+       System.out.print("Conductor sin servicios, se está trabajando");
    }
-    
+        
     @Override
     public String toString(){
         return super.toString()+"[ Licencia: "+getLicencia()+" Estado: "+getEstado()+" Vehiculo: "+getVehiculo()+"]";
