@@ -29,12 +29,11 @@ public class SistemaPrincipal {
         }else{
             System.out.println("Bienvenido al sistema");
             validar=true; 
-<<<<<<< HEAD
             usuario User=Crear_usuario("usuarios.txt",Usuario);
-=======
-
-        usuario User= Crear_usuario("usuarios.txt",Usuario);
         if(User.getTipo()=='C'){
+            if(validarcliente("Cliente.txt",User)==false){
+               System.out.println("Cliente no registrado");
+            }
             Cliente cliente_A= (Cliente)User;
             mostrarMenuCliente();
             System.out.print("Ingrese su opcion: ");
@@ -111,7 +110,7 @@ public class SistemaPrincipal {
                 default:
                     System.out.print("Se cerró el menú");  
             }
->>>>>>> 9fc62fe0060593487141a0e397ebcf7bb537981c
+
         }
         
         /*
@@ -185,7 +184,7 @@ public class SistemaPrincipal {
            String []datos;
            datos=linea.split(",");
          if(User.equals(datos[3])){         
-            usuario user_t= new usuario(datos[1], datos[2], datos[0], datos[5], datos[3],datos[4],datos[5].charAt(0));
+            usuario user_t= new usuario(datos[1], datos[2], datos[0], datos[5], datos[3],datos[4],datos[6].charAt(0));
             user_final=user_t;
          }
       
@@ -215,9 +214,7 @@ public class SistemaPrincipal {
         System.out.println("2. Solicitar servicio de comida");
         System.out.println("3. Solicitar entrega encomienda");
         System.out.println("4. Consultar servicios");
-    }
-
-    
+    } 
     public static void mostrarMenuConductor(){
         System.out.println("/********MENÚ********/");
         System.out.println("/*                  */");
@@ -232,18 +229,20 @@ public class SistemaPrincipal {
      File archivo;
      boolean valor=true;
      try{
-    if ((linea = br.readLine()) == null ){
-        valor=false; 
-      }
-     }catch(Exception e){
-      e.printStackTrace(); 
+      Encabezado=br.readLine();
+     if(Encabezado==" "){
+         valor=false;
      }
+         
+     }catch(Exception e2){
+             
+             }
       if(valor==false){       
      try {
          archivo=new File(Nombrearchivo);
          fr= new FileReader(archivo,StandardCharsets.UTF_8);
          br=new BufferedReader(fr);
-         Encabezado=br.readLine();
+         
         while ((linea = br.readLine()) != null )  {
            String []datos;
            datos=linea.split(",");
@@ -258,5 +257,6 @@ public class SistemaPrincipal {
      }
     return valor;
             }
+    
     
 }
