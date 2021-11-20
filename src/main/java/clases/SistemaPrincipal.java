@@ -9,6 +9,9 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import Enums.*;
+import static clases.EntregaEncomiendas.crearServicioEncomienda;
+import static clases.ServicioDelivery.crearServicioDelivery;
+import static clases.ServicioTaxi.crearServicioTaxi;
 
 /**
  *
@@ -42,50 +45,18 @@ public class SistemaPrincipal {
                     switch (op) {
                         case 1:
                             System.out.println("/********SERVICIO TAXI********/");
+                            crearServicioTaxi();
 
-                            System.out.print("Ingrese la fecha: ");
-                            String fecha_t = sc.nextLine();
-                            System.out.print("Ingrese punto de partida: ");
-                            String p_inicio = sc.nextLine();
-                            System.out.print("Ingrese punto de llegada: ");
-                            String p_llegada = sc.nextLine();
-                            Ruta ruta_t = new Ruta(p_inicio, p_llegada);
-                            System.out.print("Ingrese la cantidad de personas que viajaran: ");
-                            int cantidad_p = sc.nextInt();
-                            sc.nextLine();
-                            Servicio Taxi = new ServicioTaxi(ruta_t, fecha_t, cantidad_p);
                             break;
                         case 2:
                             System.out.println("/********SERVICIO ENCOMIENDAS********/");
+                            crearServicioEncomienda();
 
-                            System.out.print("Ingrese la fecha: ");
-                            String fecha_e = sc.nextLine();
-                            System.out.print("Ingrese punto de partida: ");
-                            String p_inicio_e = sc.nextLine();
-                            System.out.print("Ingrese punto de llegada: ");
-                            String p_llegada_e = sc.nextLine();
-                            Ruta ruta_e = new Ruta(p_inicio_e, p_llegada_e);
-                            System.out.print("Ingrese el tipo de encomienda: ");
-                            String t_encomienda = sc.nextLine();
-                            TipoEncomienda T_e = TipoEncomienda.valueOf(t_encomienda.toUpperCase());
-                            System.out.print("Ingrese la cantidad de items que enviará: ");
-                            int cantidad_items = sc.nextInt();
-                            sc.nextLine();
-                            Servicio Encomienda = new EntregaEncomiendas(ruta_e, fecha_e, cantidad_items, T_e);
                             break;
                         case 3:
                             System.out.println("/********SERVICIO DELIVERY COMIDA********/");
+                            crearServicioDelivery();
 
-                            System.out.print("Ingrese la fecha: ");
-                            String fecha_de = sc.nextLine();
-                            System.out.print("Ingrese punto de partida: ");
-                            String p_inicio_de = sc.nextLine();
-                            System.out.print("Ingrese punto de llegada: ");
-                            String p_llegada_de = sc.nextLine();
-                            Ruta ruta_de = new Ruta(p_inicio_de, p_llegada_de);
-                            System.out.print("Ingrese el pedido: "); //Falta crear el pedido como objeto, y la clase restaurante y menú
-
-                            Servicio Delivery = new ServicioDelivery(ruta_de, fecha_de, "1234", "Williams restaurant");
                             break;
                         case 4:
                             System.out.println("/********CONSULTAR SERVICIO********/");
@@ -110,11 +81,7 @@ public class SistemaPrincipal {
                             System.out.print("Se cerró el menú");
                     }
                 }
-                /*
-        System.out.println("nueva linea codigo prueba");
-        mostrarMenuCliente();
-        mostrarMenuVendedor();
-                 */
+
             }
         }
     }
@@ -219,24 +186,28 @@ public class SistemaPrincipal {
         System.out.println("/********************/");
         System.out.println("1. Consultar servicio asignado");
     }
-
     public static void ResgistarClientes(String Nombrearchivo) {
 
     }
+
     public ArrayList<Plato> crearMenu(String nombreArchivo,Restaurante restaurante){
+
         File archivo = null;
         FileReader fr = null;
         BufferedReader br = null;
         String linea;
         String Encabezado;
+
         
         ArrayList<Plato> listaPlato=new ArrayList();
+
         try {
 
             archivo = new File(nombreArchivo);
             fr = new FileReader(archivo, StandardCharsets.UTF_8);
             br = new BufferedReader(fr);
             Encabezado = br.readLine();
+
             
             while ((linea = br.readLine()) != null) {
                 String[] datos;
@@ -248,10 +219,9 @@ public class SistemaPrincipal {
                     
                 }
                 restaurante.setListamenu(listaPlato);
-                
-//                
+            }   
+               
 
-            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -266,4 +236,5 @@ public class SistemaPrincipal {
         }
         return restaurante.getListamenu();
     }
+
 }
