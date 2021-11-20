@@ -52,6 +52,10 @@ public class usuario {
     public String getContraseña() {
         return contraseña;
     }
+    
+    public char getTipo(){
+        return tipo;
+    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
