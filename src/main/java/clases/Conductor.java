@@ -49,7 +49,7 @@ public class Conductor extends usuario {
     public void ConsultarServicioAsignado(){
        
    }
-    
+        
     @Override
     public String toString(){
         return super.toString()+"[ Licencia: "+getLicencia()+" Estado: "+getEstado()+" Vehiculo: "+getVehiculo()+"]";

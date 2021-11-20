@@ -25,6 +25,9 @@ public class usuario {
        
        
    }
+   public usuario(){
+       
+   }
 
     public String getNombre() {
         return nombre;
@@ -77,7 +80,8 @@ public class usuario {
    public void ConsultarServicioAsignado(){
        
    }
-    
+   
+  
    @Override
    public String toString(){
        return "[Nombre: "+getNombre()+" "+getApellido()+" Usuario: "+getUsuario()+" Nro.Cedula: "+getNro_cedula()+" Celular: "+getCelular()+"]";

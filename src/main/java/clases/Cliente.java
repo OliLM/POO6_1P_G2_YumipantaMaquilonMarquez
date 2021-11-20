@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package clases;
-
+import java.util.ArrayList;
 /**
  *
  * @author ismael123
@@ -11,6 +11,7 @@ package clases;
 public class Cliente extends usuario{
     private int edad;
     private int nro_tarjeta;
+    private ArrayList listaServicio = new ArrayList();
     
     public Cliente(String nombre, String apellido, String nro_cedula, String celular, String usuario, String contraseña, int edad, int nro_tarjeta,char tipo){
          super(nombre,apellido,nro_cedula,celular,usuario,contraseña,tipo);
