@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package clases;
+import java.util.Scanner;
 
 /**
  *
@@ -11,6 +12,7 @@ package clases;
  */
 public class ServicioTaxi extends Servicio{
     private int cantidadPersonas;
+    
     
     //constructor
     public ServicioTaxi(Ruta ruta,String fecha,int cantidadPersonas){
@@ -23,5 +25,22 @@ public class ServicioTaxi extends Servicio{
     }
     public void setcantidadPersonas(int cantidadPersonas){
         this.cantidadPersonas=cantidadPersonas;
+    }
+    
+    public static Servicio crearServicioTaxi(){
+        Scanner sc= new Scanner(System.in);
+        System.out.print("Ingrese la fecha: ");
+        String fecha_t= sc.nextLine();
+        System.out.print("Ingrese punto de partida: ");
+        String p_inicio= sc.nextLine();
+        System.out.print("Ingrese punto de llegada: ");
+        String p_llegada= sc.nextLine();
+        Ruta ruta_t= new Ruta(p_inicio,p_llegada);
+        System.out.print("Ingrese la cantidad de personas que viajaran: ");
+        int cantidad_p= sc.nextInt();
+        sc.nextLine();
+        Servicio Taxi= new ServicioTaxi(ruta_t,fecha_t,cantidad_p);
+        sc.close();
+        return Taxi;
     }
 }
