@@ -4,17 +4,17 @@
  * and open the template in the editor.
  */
 package clases;
-
+import Enums.TipoEncomienda;
 /**
  *
  * @author DELL
  */
 public class EntregaEncomiendas extends Servicio {
     private int cantidadProductos;
-    private String tipoEncomienda;
+    private TipoEncomienda tipoEncomienda;
     
-    public EntregaEncomiendas(String Partida,String Llegada,String fecha,int cantidadProductos,String tipoEncomienda){
-        super(Partida,Llegada,fecha);
+    public EntregaEncomiendas(Ruta ruta,String fecha,int cantidadProductos,TipoEncomienda tipoEncomienda){
+        super(ruta,fecha);
         this.cantidadProductos=cantidadProductos;
         this.tipoEncomienda=tipoEncomienda;
     }
@@ -25,10 +25,10 @@ public class EntregaEncomiendas extends Servicio {
         this.cantidadProductos=cantidadProductos;
     }
     
-    public String gettipoEncomienda(){
+    public TipoEncomienda gettipoEncomienda(){
         return tipoEncomienda;
     }
-    public void settipoEncomienda(String tipoEncomienda){
+    public void settipoEncomienda(TipoEncomienda tipoEncomienda){
         this.tipoEncomienda=tipoEncomienda;
     }
     
