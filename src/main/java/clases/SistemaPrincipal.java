@@ -223,27 +223,33 @@ public class SistemaPrincipal {
     public static void ResgistarClientes(String Nombrearchivo) {
 
     }
-    public ArrayList<Plato> crearMenu(String nombreArchivo){
+    public ArrayList<Plato> crearMenu(String nombreArchivo,Restaurante restaurante){
         File archivo = null;
         FileReader fr = null;
         BufferedReader br = null;
         String linea;
         String Encabezado;
         
+        ArrayList<Plato> listaPlato=new ArrayList();
         try {
 
             archivo = new File(nombreArchivo);
             fr = new FileReader(archivo, StandardCharsets.UTF_8);
             br = new BufferedReader(fr);
             Encabezado = br.readLine();
+            
             while ((linea = br.readLine()) != null) {
                 String[] datos;
                 datos = linea.split(",");
-                Plato plato=new Plato(datos[1],Double.parseDouble(datos[3]),Integer.valueOf(datos[0]));
-//                if (User.equals(datos[3])) {
-//                    usuario user_t = new usuario(datos[1], datos[2], datos[0], datos[5], datos[3], datos[4], datos[5].charAt(0));
-//                    user_final = user_t;
-//                }
+                
+                if (restaurante.getCodigo()==Integer.valueOf(datos[0])){
+                    Plato plato=new Plato(datos[1],Double.parseDouble(datos[3]),Integer.valueOf(datos[0]));
+                    listaPlato.add(plato);
+                    
+                }
+                restaurante.setListamenu(listaPlato);
+                
+//                
 
             }
         } catch (Exception e) {
@@ -258,6 +264,6 @@ public class SistemaPrincipal {
                 e2.printStackTrace();
             }
         }
-        return user_final;
+        return restaurante.getListamenu();
     }
 }
