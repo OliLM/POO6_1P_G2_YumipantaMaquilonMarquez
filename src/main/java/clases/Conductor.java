@@ -47,7 +47,7 @@ public class Conductor extends usuario {
     
     @Override
     public void ConsultarServicioAsignado(){
-       
+       System.out.print("Conductor sin servicios, se está trabajando");
    }
         
     @Override

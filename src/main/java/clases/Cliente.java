@@ -37,7 +37,7 @@ public class Cliente extends usuario{
     
     @Override
     public void ConsultarServicioAsignado(){
-       
+       System.out.print("No hay servicio de momento, se está trabajando en eso");
    }
     
     @Override
