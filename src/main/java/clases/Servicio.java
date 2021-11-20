@@ -16,8 +16,8 @@ public class Servicio {
     protected int valorPagar;
     protected String codigo;
     
-    public Servicio(String partida,String llegada,String fecha){
-        this.ruta=new Ruta(partida,llegada);
+    public Servicio(Ruta ruta,String fecha){
+        this.ruta=ruta;
         this.fecha=fecha;
         this.valorPagar=valorPagar;
         this.codigo=String.valueOf((int)(Math.random()*1000000));
