@@ -12,8 +12,8 @@ package clases;
 public class ServicioDelivery extends Servicio{
     private Pedido pedido;
     
-    public ServicioDelivery(String puntoPartida,String puntoLlegada,String fecha,String codigo,String nombre){
-        super(puntoPartida,puntoLlegada,fecha);
+    public ServicioDelivery(Ruta ruta,String fecha,String codigo,String nombre){
+        super(ruta,fecha);
         this.pedido=new Pedido(nombre);
     }
     
