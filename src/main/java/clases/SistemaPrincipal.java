@@ -25,14 +25,11 @@ public class SistemaPrincipal {
         System.out.println("Contraseña: ");
         String Contraseña= sc.nextLine();
         if( IngresoSistema(Usuario.toLowerCase(),Contraseña.toLowerCase(),"usuarios.txt")==false || validardatos(Usuario)==false){
-            System.out.println("credenciales no validas");
-           
-          
+            System.out.println("credenciales no validas");      
         }else{
             System.out.println("Bienvenido al sistema");
             validar=true; 
-        }
-        
+
         usuario User= Crear_usuario("usuarios.txt",Usuario);
         if(User.getTipo()=='C'){
             Cliente cliente_A= (Cliente)User;
@@ -117,9 +114,8 @@ public class SistemaPrincipal {
         mostrarMenuCliente();
         mostrarMenuVendedor();
         */
-        }
-       
-        
+        }        
+    }
     }
     public static boolean validardatos(String datos){
        return datos.matches("[a-zA-z]*");  
@@ -215,14 +211,15 @@ public class SistemaPrincipal {
         System.out.println("3. Solicitar entrega encomienda");
         System.out.println("4. Consultar servicios");
     }
+
     
     public static void mostrarMenuConductor(){
         System.out.println("/********MENÚ********/");
         System.out.println("/*                  */");
         System.out.println("/********************/");
         System.out.println("1. Consultar servicio asignado");
+    }  
+    public static void ResgistarClientes(String Nombrearchivo){
+        
     }
-
-  
-    
 }
