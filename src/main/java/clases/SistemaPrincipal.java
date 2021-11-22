@@ -4,6 +4,8 @@
  */
 package clases;
 
+import Enums.EstadoConductor;
+import Enums.TipoVehiculo;
 import java.util.Scanner;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -23,68 +25,67 @@ public class SistemaPrincipal {
         Scanner sc = new Scanner(System.in);
         System.out.println("Inicio del sistema");
 
-        while(validar==false){ //se pone un ciclo para que cuando ponga mal los datos ingrese denuevo
-        System.out.println("Ingrese el usuario y contraseña");
-        System.out.println("usuario: ");
-        String Usuario= sc.nextLine();
-        System.out.println("Contraseña: ");
-        String Contraseña= sc.nextLine();
-        if( IngresoSistema(Usuario.toLowerCase(),Contraseña.toLowerCase(),"usuarios.txt")==false || validardatos(Usuario)==false){
-            System.out.println("credenciales no validas");      
-        }else{
-            System.out.println("Bienvenido al sistema");
-            validar=true; 
-            usuario User=Crear_usuario("usuarios.txt",Usuario);
-        if(User.getTipo()=='C'){
-            if(validarcliente("Cliente.txt",User)==false){
-               System.out.println("Cliente no registrado");
-            }
-            Cliente cliente_A= (Cliente)User;
-            mostrarMenuCliente();
-            System.out.print("Ingrese su opcion: ");
-            int op= sc.nextInt();
-            sc.nextLine();
-            switch(op){
-                case 1:
-                    System.out.println("/********SERVICIO TAXI********/");
-                    crearServicioTaxi();
-                    
-                    break;
-                case 2:
-                    System.out.println("/********SERVICIO ENCOMIENDAS********/");
-                    crearServicioEncomienda();
-                   
-                    break;
-                case 3:
-                    System.out.println("/********SERVICIO DELIVERY COMIDA********/");
-                    crearServicioDelivery();
-                    
-                    break;
-                case 4:
-                    System.out.println("/********CONSULTAR SERVICIO********/");
-                    cliente_A.ConsultarServicioAsignado();
-                    break;
-                default:
-                    System.out.print("Se cerró el menú");
-            }
-        
-        }
-        else{
-            Conductor conductor_A= (Conductor)User;
-            mostrarMenuConductor();
-            System.out.print("Ingrese su opcion: ");
-            int op= sc.nextInt();
-            sc.nextLine();
-            switch(op){
-                case 1:
-                  System.out.println("/********CONSULTAR SERVICIO********/");
-                  conductor_A.ConsultarServicioAsignado();
-                  break;
-                default:
-                    System.out.print("Se cerró el menú");  
-            }
+        while (validar == false) { //se pone un ciclo para que cuando ponga mal los datos ingrese denuevo
+            System.out.println("Ingrese el usuario y contraseña");
+            System.out.println("usuario: ");
+            String Usuario = sc.nextLine();
+            System.out.println("Contraseña: ");
+            String Contraseña = sc.nextLine();
+            if (IngresoSistema(Usuario.toLowerCase(), Contraseña.toLowerCase(), "usuarios.txt") == false || validardatos(Usuario) == false) {
+                System.out.println("credenciales no validas");
+            } else {
+                System.out.println("Bienvenido al sistema");
+                validar = true;
+                usuario User = Crear_usuario("usuarios.txt", Usuario);
+                if (User.getTipo() == 'C') {
+                    if (validarcliente("Cliente.txt", User) == false) {
+                        System.out.println("Cliente no registrado");
+                    }
+                    Cliente cliente_A = (Cliente) User;//Down casting
+                    mostrarMenuCliente();
+                    System.out.print("Ingrese su opcion: ");
+                    int op = sc.nextInt();
+                    sc.nextLine();
+                    switch (op) {
+                        case 1:
+                            System.out.println("/********SERVICIO TAXI********/");
+                            crearServicioTaxi();
 
-        }
+                            break;
+                        case 2:
+                            System.out.println("/********SERVICIO ENCOMIENDAS********/");
+                            crearServicioEncomienda();
+
+                            break;
+                        case 3:
+                            System.out.println("/********SERVICIO DELIVERY COMIDA********/");
+                            crearServicioDelivery();
+
+                            break;
+                        case 4:
+                            System.out.println("/********CONSULTAR SERVICIO********/");
+                            cliente_A.ConsultarServicioAsignado();
+                            break;
+                        default:
+                            System.out.print("Se cerró el menú");
+                    }
+
+                } else {
+                    Conductor conductor_A = (Conductor) User;//Down casting
+                    mostrarMenuConductor();
+                    System.out.print("Ingrese su opcion: ");
+                    int op = sc.nextInt();
+                    sc.nextLine();
+                    switch (op) {
+                        case 1:
+                            System.out.println("/********CONSULTAR SERVICIO********/");
+                            conductor_A.ConsultarServicioAsignado();
+                            break;
+                        default:
+                            System.out.print("Se cerró el menú");
+                    }
+
+                }
             }
         }
     }
@@ -134,6 +135,7 @@ public class SistemaPrincipal {
         }
 
     }
+
     private static usuario Crear_usuario(String nombrearchivo, String User) {
         File archivo = null;
         FileReader fr = null;
@@ -151,8 +153,15 @@ public class SistemaPrincipal {
                 String[] datos;
                 datos = linea.split(",");
                 if (User.equals(datos[3])) {
-                    usuario user_t = new usuario(datos[1], datos[2], datos[0], datos[5], datos[3], datos[4], datos[5].charAt(0));
-                    user_final = user_t;
+                    if (datos[6].charAt(0) == 'R') {
+                        Conductor conductor = new Conductor(datos[1], datos[2], datos[0], datos[5], datos[3], datos[4], "95754521", EstadoConductor.DISPONIBLE, TipoVehiculo.AUTO, datos[6].charAt(0));
+                        //Polimorfismo de asignacion
+                        user_final = conductor;
+                    } else {
+                        Cliente cliente = new Cliente(datos[1], datos[2], datos[0], datos[5], datos[3], datos[4], 25, 56561561, datos[6].charAt(0));
+                        //Polimorfismo de asignacion
+                        user_final = cliente;
+                    }
                 }
 
             }
@@ -180,52 +189,52 @@ public class SistemaPrincipal {
         System.out.println("2. Solicitar servicio de comida");
         System.out.println("3. Solicitar entrega encomienda");
         System.out.println("4. Consultar servicios");
-    } 
-   
+    }
 
-    
     public static void mostrarMenuConductor() {
         System.out.println("/********MENÚ********/");
         System.out.println("/*                  */");
         System.out.println("/********************/");
         System.out.println("1. Consultar servicio asignado");
-    }  
-    private static boolean validarcliente(String Nombrearchivo,usuario usuario){ 
-    FileReader fr = null;
-    BufferedReader br = null;
-     String linea;
-     String Encabezado;
-     File archivo;
-     boolean valor=true;
-     try{
-      Encabezado=br.readLine();
-     if(Encabezado==" "){
-         valor=false;
-     }
-         
-     }catch(Exception e2){
-             
-             }
-      if(valor==false){       
-     try {
-         archivo=new File(Nombrearchivo);
-         fr= new FileReader(archivo,StandardCharsets.UTF_8);
-         br=new BufferedReader(fr);
-         
-        while ((linea = br.readLine()) != null )  {
-           String []datos;
-           datos=linea.split(",");
-           if(usuario.getNro_cedula().equals(datos[0])){
-              valor =true;   
-           }  
-         }    
-     }catch(Exception e){
-         e.printStackTrace();
-     }
-     
-     }
-    return valor;
+    }
+
+    private static boolean validarcliente(String Nombrearchivo, usuario usuario) {
+        FileReader fr = null;
+        BufferedReader br = null;
+        String linea;
+        String Encabezado;
+        File archivo;
+        boolean valor = true;
+        try {
+            Encabezado = br.readLine();
+            if (Encabezado == " ") {
+                valor = false;
             }
+
+        } catch (Exception e2) {
+
+        }
+        if (valor == false) {
+            try {
+                archivo = new File(Nombrearchivo);
+                fr = new FileReader(archivo, StandardCharsets.UTF_8);
+                br = new BufferedReader(fr);
+
+                while ((linea = br.readLine()) != null) {
+                    String[] datos;
+                    datos = linea.split(",");
+                    if (usuario.getNro_cedula().equals(datos[0])) {
+                        valor = true;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+        return valor;
+    }
+
     public ArrayList<Plato> crearMenu(String nombreArchivo, Restaurante restaurante) {
         File archivo = null;
         FileReader fr = null;

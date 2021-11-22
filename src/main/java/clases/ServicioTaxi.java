@@ -39,8 +39,16 @@ public class ServicioTaxi extends Servicio{
         System.out.print("Ingrese la cantidad de personas que viajaran: ");
         int cantidad_p= sc.nextInt();
         sc.nextLine();
-        Servicio Taxi= new ServicioTaxi(ruta_t,fecha_t,cantidad_p);
+        //comienzo
+        Ruta ruta=new Ruta(p_inicio,p_llegada);
+        Servicio Taxi= new ServicioTaxi(ruta,fecha_t,cantidad_p);
         sc.close();
         return Taxi;
     }
+
+    @Override
+    public String toString() {
+        return super.toString()+"\nCantidad de personas: " + cantidadPersonas;
+    }//fin
+    
 }

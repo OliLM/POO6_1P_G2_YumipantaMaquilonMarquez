@@ -5,6 +5,8 @@
  */
 package clases;
 
+import java.util.Scanner;
+
 /**
  *
  * @author DELL
@@ -13,13 +15,13 @@ public class Servicio {
     protected Ruta ruta;
     protected Conductor conductor;
     protected String fecha;
-    protected int valorPagar;
+    protected double valorPagar;//cambio
     protected String codigo;
     
     public Servicio(Ruta ruta,String fecha){
         this.ruta=ruta;
         this.fecha=fecha;
-        this.valorPagar=valorPagar;
+        this.valorPagar=50;//cambio
         this.codigo=String.valueOf((int)(Math.random()*1000000));
                 
     }
@@ -42,12 +44,42 @@ public class Servicio {
         this.ruta=new Ruta(partida,llegada);
     }
     
-    public int getvalorPagar(){
+    public double getvalorPagar(){
         return valorPagar;
     }
-    public void setvalorPagar(int valorPagar){
+    public void setvalorPagar(double valorPagar){
         this.valorPagar=valorPagar;
     }
-    
+    @Override//comienzo
+    public String toString() {
+        return "ruta: " + ruta.toString() + ",\nconductor: " + conductor + ",\nfecha: " + fecha + ",\nvalorPagar: " + valorPagar + ",\ncodigo: " + codigo;
+    }
+//    public double metodo_pago(int op) {
+//        double precio = 25.60;
+//        double precioFinal = 0;
+//        int ingreso = 0;
+//
+//        while (ingreso == 0) {
+//
+//            //pago con tarjeta
+//            if (op == 1) {
+//                precioFinal = precio * 1.10;
+//                ingreso = 1;
+//            } else if (op == 2) {
+//                precioFinal = precio;
+//                ingreso = 2;
+//            } else {
+//                System.out.println("Dato incorrecto, vuelva a elegir");
+//                ingreso = 0;
+//                System.out.println("Ingrese una opcion:\n1.Pago por tarjeta\n2.Pago en efectivo");
+//                Scanner sc = new Scanner(System.in);
+//                int nuevaOp = sc.nextInt();
+//                op = nuevaOp;
+//
+//            }
+//
+//        }
+//        return precioFinal;
+//    }fin
         
 }

@@ -32,4 +32,8 @@ public class Ruta {
         this.puntoLlegada=puntoLlegada;
     }
     
+    @Override//inicio
+    public String toString() {
+        return "Desde: "+ puntoPartida + "\nHasta: " + puntoLlegada;
+    }//fin
 }
