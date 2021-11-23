@@ -47,7 +47,7 @@ public class SistemaPrincipal {
                     int op = sc.nextInt();
                     sc.nextLine();
                     int validarWhile = 1;
-                    while (validarWhile != 0) {
+                    //while (validarWhile != 0) {
                         switch (op) {
                             case 1:
                                 System.out.println("/********SERVICIO TAXI********/");//ww inicio
@@ -84,8 +84,9 @@ public class SistemaPrincipal {
                                 break;
                             default:
                                 System.out.print("Se cerró el menú");
+                                
                         }
-                    }
+                    //}
 
                 } else {
                     Conductor conductor_A = (Conductor) User;//Down casting
