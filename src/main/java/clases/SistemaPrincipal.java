@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import static clases.EntregaEncomiendas.crearServicioEncomienda;
 import static clases.ServicioDelivery.crearServicioDelivery;
-import static clases.ServicioTaxi.crearServicioTaxi;
+//import static clases.ServicioTaxi.crearServicioTaxi;
 
 /**
  *
@@ -43,31 +43,48 @@ public class SistemaPrincipal {
                     }
                     Cliente cliente_A = (Cliente) User;//Down casting
                     mostrarMenuCliente();
-                    System.out.print("Ingrese su opcion: ");
+                    System.out.println("Ingrese su opcion: ");
                     int op = sc.nextInt();
                     sc.nextLine();
-                    switch (op) {
-                        case 1:
-                            System.out.println("/********SERVICIO TAXI********/");
-                            crearServicioTaxi();
+                    int validarWhile = 1;
+                    while (validarWhile != 0) {
+                        switch (op) {
+                            case 1:
+                                System.out.println("/********SERVICIO TAXI********/");//ww inicio
 
-                            break;
-                        case 2:
-                            System.out.println("/********SERVICIO ENCOMIENDAS********/");
-                            crearServicioEncomienda();
+                                System.out.println("Ingrese su ubicacion:");
+                                String ubicacion = sc.nextLine();
+                                System.out.println("Ingrese su destino:");
+                                String destino = sc.nextLine();
+                                Ruta ruta = new Ruta(ubicacion, destino);
+                                System.out.println("Ingrese fecha del viaje en el siguiente formato(5 nov - 10:30):");
+                                String fecha = sc.nextLine();
+                                System.out.println("Ingrese cantidad de personas:");
+                                int personas = sc.nextInt();
+                                sc.nextLine();
+                                ServicioTaxi taxi = new ServicioTaxi(ruta, fecha, personas);
+                                taxi.metodo_pago();
+                                
+                                //ww fin
 
-                            break;
-                        case 3:
-                            System.out.println("/********SERVICIO DELIVERY COMIDA********/");
-                            crearServicioDelivery();
+                                break;
+                            case 2:
+                                System.out.println("/********SERVICIO ENCOMIENDAS********/");
+                                crearServicioEncomienda();
 
-                            break;
-                        case 4:
-                            System.out.println("/********CONSULTAR SERVICIO********/");
-                            cliente_A.ConsultarServicioAsignado();
-                            break;
-                        default:
-                            System.out.print("Se cerró el menú");
+                                break;
+                            case 3:
+                                System.out.println("/********SERVICIO DELIVERY COMIDA********/");
+                                crearServicioDelivery();
+
+                                break;
+                            case 4:
+                                System.out.println("/********CONSULTAR SERVICIO********/");
+                                cliente_A.ConsultarServicioAsignado();
+                                break;
+                            default:
+                                System.out.print("Se cerró el menú");
+                        }
                     }
 
                 } else {

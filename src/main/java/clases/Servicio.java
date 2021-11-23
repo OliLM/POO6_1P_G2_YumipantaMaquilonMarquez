@@ -54,32 +54,42 @@ public class Servicio {
     public String toString() {
         return "ruta: " + ruta.toString() + ",\nconductor: " + conductor + ",\nfecha: " + fecha + ",\nvalorPagar: " + valorPagar + ",\ncodigo: " + codigo;
     }
-//    public double metodo_pago(int op) {
-//        double precio = 25.60;
-//        double precioFinal = 0;
-//        int ingreso = 0;
-//
-//        while (ingreso == 0) {
-//
-//            //pago con tarjeta
-//            if (op == 1) {
-//                precioFinal = precio * 1.10;
-//                ingreso = 1;
-//            } else if (op == 2) {
-//                precioFinal = precio;
-//                ingreso = 2;
-//            } else {
-//                System.out.println("Dato incorrecto, vuelva a elegir");
-//                ingreso = 0;
-//                System.out.println("Ingrese una opcion:\n1.Pago por tarjeta\n2.Pago en efectivo");
-//                Scanner sc = new Scanner(System.in);
-//                int nuevaOp = sc.nextInt();
-//                op = nuevaOp;
-//
-//            }
-//
-//        }
-//        return precioFinal;
-//    }fin
+    public double calcularPrecio(double precio) {
+        double precioFinal = precio;
+        return precioFinal;
+    }
+    public double calcularPrecio(double precio,  double incremento){
+        double precioFinal = precio*incremento;
+        return precioFinal;
+    }
+    public void metodo_pago(){
+        double valor=0;
+        int validar=0;
+        Scanner sc =new Scanner(System.in);
+        while (validar!=0){
+            System.out.println("Elija una opción de pago:\n1.Pago en efectivo\n2.Pago con tarjeta\nIngrese una opcion:");
+            int op =sc.nextInt();
+            sc.nextLine();
+            switch (op){
+                case 1:
+                    valor=calcularPrecio(valorPagar);
+                    validar=0;
+                    break;
+                case 2:
+                    double incremento =1.10;
+                    valor=calcularPrecio(valorPagar,incremento);
+                    validar=0;
+                    break;
+                default:
+                    System.out.println("Opcion no valida. Vuelva a elegir\n");
+                    validar=1;
+                    
+            }
+            
+        }
+        
+        valorPagar=valor;
+    }
+
         
 }

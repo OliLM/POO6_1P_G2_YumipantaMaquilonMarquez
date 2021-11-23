@@ -27,24 +27,24 @@ public class ServicioTaxi extends Servicio{
         this.cantidadPersonas=cantidadPersonas;
     }
     
-    public static Servicio crearServicioTaxi(){
-        Scanner sc= new Scanner(System.in);
-        System.out.print("Ingrese la fecha: ");
-        String fecha_t= sc.nextLine();
-        System.out.print("Ingrese punto de partida: ");
-        String p_inicio= sc.nextLine();
-        System.out.print("Ingrese punto de llegada: ");
-        String p_llegada= sc.nextLine();
-        Ruta ruta_t= new Ruta(p_inicio,p_llegada);
-        System.out.print("Ingrese la cantidad de personas que viajaran: ");
-        int cantidad_p= sc.nextInt();
-        sc.nextLine();
-        //comienzo
-        Ruta ruta=new Ruta(p_inicio,p_llegada);
-        Servicio Taxi= new ServicioTaxi(ruta,fecha_t,cantidad_p);
-        sc.close();
-        return Taxi;
-    }
+//    public static Servicio crearServicioTaxi(){
+//        Scanner sc= new Scanner(System.in);
+//        System.out.print("Ingrese la fecha: ");
+//        String fecha_t= sc.nextLine();
+//        System.out.print("Ingrese punto de partida: ");
+//        String p_inicio= sc.nextLine();
+//        System.out.print("Ingrese punto de llegada: ");
+//        String p_llegada= sc.nextLine();
+//        Ruta ruta_t= new Ruta(p_inicio,p_llegada);
+//        System.out.print("Ingrese la cantidad de personas que viajaran: ");
+//        int cantidad_p= sc.nextInt();
+//        sc.nextLine();
+//        //comienzo
+//        Ruta ruta=new Ruta(p_inicio,p_llegada);
+//        Servicio Taxi= new ServicioTaxi(ruta,fecha_t,cantidad_p);
+//        sc.close();
+//        return Taxi;
+//    }
 
     @Override
     public String toString() {
