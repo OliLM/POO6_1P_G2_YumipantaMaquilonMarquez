@@ -21,6 +21,11 @@ import static clases.ServicioDelivery.crearServicioDelivery;
 public class SistemaPrincipal {
 
     public static void main(String[] args) {
+        //Creacion de archivos txt
+        Archivos.EscribirArchivo("conductoresApp.txt", "nombre,codigoUsuario,licencia,estado,codigoVehiculo\nLuis,2739,238983,D,23\nJuan,3847,293487,O,12\nMarco,3474,828737,D,15");
+        Archivos.EscribirArchivo("vehiculo.txt", "codigoVehiculo,placa,modelo,marca,tipo\n23,GSX3847,CX3,Mazda,A\n12,GSD8475,Aveo,Cherolet,A\n15,GAF9833,I10,Hyundai,M");
+        Archivos.EscribirArchivo("viajes.txt", "numeroServicio,nombreCliente,nombreConductor,desde,hasta,fechayhora.numeroPasajeros,tipoPago,valorPagar\n");
+
         boolean validar = false;
         Scanner sc = new Scanner(System.in);
         System.out.println("Inicio del sistema");
@@ -41,11 +46,11 @@ public class SistemaPrincipal {
                     if (validarcliente("Clientes.txt", User) == false) {
                         System.out.println("Cliente no registrado");
                         System.out.println("Ingrese su edad");
-                        int edad=sc.nextInt();
+                        int edad = sc.nextInt();
                         System.out.println("Ingres el numero de tarjeta de credito");
-                        String tarjeta=sc.next();
-                        registrar_cliente(edad,tarjeta,User.getNro_cedula(),"Clientes.txt");
-                        
+                        String tarjeta = sc.next();
+                        registrar_cliente(edad, tarjeta, User.getNro_cedula(), "Clientes.txt");
+
                     }
                     System.out.println("Cliente registrado");
                     Cliente cliente_A = (Cliente) User;//Down casting
@@ -55,44 +60,56 @@ public class SistemaPrincipal {
                     sc.nextLine();
                     int validarWhile = 1;
                     //while (validarWhile != 0) {
-                        switch (op) {
-                            case 1:
-                                System.out.println("/********SERVICIO TAXI********/");//ww inicio
+                    switch (op) {
+                        case 1:
+                            System.out.println("/********SERVICIO TAXI********/");//ww inicio
 
-                                System.out.println("Ingrese su ubicacion:");
-                                String ubicacion = sc.nextLine();
-                                System.out.println("Ingrese su destino:");
-                                String destino = sc.nextLine();
-                                Ruta ruta = new Ruta(ubicacion, destino);
-                                System.out.println("Ingrese fecha del viaje en el siguiente formato(5 nov - 10:30):");
-                                String fecha = sc.nextLine();
-                                System.out.println("Ingrese cantidad de personas:");
-                                int personas = sc.nextInt();
-                                sc.nextLine();
-                                ServicioTaxi taxi = new ServicioTaxi(ruta, fecha, personas);
-                                taxi.metodo_pago();
-                                
-                                //ww fin
+                            System.out.println("Ingrese su ubicacion:");
+                            String ubicacion = sc.nextLine();
+                            System.out.println("Ingrese su destino:");
+                            String destino = sc.nextLine();
+                            Ruta ruta = new Ruta(ubicacion, destino);
+                            System.out.println("Ingrese fecha del viaje en el siguiente formato(5 nov - 10:30):");
+                            String fecha = sc.nextLine();
+                            System.out.println("Ingrese cantidad de personas:");
+                            int personas = sc.nextInt();
+                            sc.nextLine();
+                            ServicioTaxi taxi = new ServicioTaxi(ruta, fecha, personas);
+                            String metodo = taxi.metodo_pago();
 
-                                break;
-                            case 2:
-                                System.out.println("/********SERVICIO ENCOMIENDAS********/");
-                                crearServicioEncomienda();
+                            System.out.println("Desea generar el servicio (si/no)");
+                            String confirmacion = sc.nextLine();
+                            if (confirmacion.equals("si")) {
+                                String conductor = taxi.asignarconductor();
+                                String linea = taxi.getCodigo() + "," + cliente_A.getNombre() + "," + conductor + taxi.getRuta().getpuntoPartida() + "," + taxi.getRuta().getpuntoLlegada() + "," + taxi.getfecha() + "," + taxi.getcantidadPersonas() + "," + metodo + taxi.getvalorPagar();
+                                Archivos.EscribirArchivo("viajes.txt", linea);
+                                System.out.println("Factura:\n" + taxi.toString());
 
-                                break;
-                            case 3:
-                                System.out.println("/********SERVICIO DELIVERY COMIDA********/");
-                                crearServicioDelivery();
+                                validarWhile = 0;
+                            } else {
+                                validarWhile = 1;
+                            }
 
-                                break;
-                            case 4:
-                                System.out.println("/********CONSULTAR SERVICIO********/");
-                                cliente_A.ConsultarServicioAsignado();
-                                break;
-                            default:
-                                System.out.print("Se cerró el menú");
-                                
-                        }
+                            //ww fin
+                            break;
+                        case 2:
+                            System.out.println("/********SERVICIO ENCOMIENDAS********/");
+                            crearServicioEncomienda();
+
+                            break;
+                        case 3:
+                            System.out.println("/********SERVICIO DELIVERY COMIDA********/");
+                            crearServicioDelivery();
+
+                            break;
+                        case 4:
+                            System.out.println("/********CONSULTAR SERVICIO********/");
+                            cliente_A.ConsultarServicioAsignado();
+                            break;
+                        default:
+                            System.out.print("Se cerró el menú");
+
+                    }
                     //}
 
                 } else {
@@ -175,11 +192,28 @@ public class SistemaPrincipal {
             while ((linea = br.readLine()) != null) {
                 String[] datos;
                 datos = linea.split(",");
+                EstadoConductor estado;
                 if (User.equals(datos[3])) {
                     if (datos[6].charAt(0) == 'R') {
-                        Conductor conductor = new Conductor(datos[1], datos[2], datos[0], datos[5], datos[3], datos[4], "95754521", EstadoConductor.DISPONIBLE, TipoVehiculo.AUTO, datos[6].charAt(0));
+
+                        String info = Archivos.licenciaEstado("conductoresApp.txt", datos[1]);
+                        String[] licenciaEstado = info.split(",");
+                        if (licenciaEstado[1].equals("D")) {
+                            estado = EstadoConductor.DISPONIBLE;
+                        } else {
+                            estado = EstadoConductor.EN_SERVICIO;
+                        }
+                        String informacion = Archivos.tipo("vehiculo.txt", licenciaEstado[2]);
+                        TipoVehiculo tipo = TipoVehiculo.AUTO;
+                        if (informacion.equals("A")) {
+                            tipo = TipoVehiculo.AUTO;
+                        } else {
+                            tipo = TipoVehiculo.MOTO;
+                        }
+                        Conductor conductor = new Conductor(datos[1], datos[2], datos[0], datos[5], datos[3], datos[4], licenciaEstado[0], estado, tipo, datos[6].charAt(0));
                         //Polimorfismo de asignacion
-                        user_final = conductor;
+                        user_final = conductor; 
+                        
                     } else {
                         Cliente cliente = new Cliente(datos[1], datos[2], datos[0], datos[5], datos[3], datos[4], 25, 56561561, datos[6].charAt(0));
                         //Polimorfismo de asignacion
@@ -201,6 +235,7 @@ public class SistemaPrincipal {
         }
         return user_final;
     }
+
     public static void mostrarMenuCliente() {
         System.out.println("/********MENÚ********/");
         System.out.println("/*                  */");
@@ -210,12 +245,14 @@ public class SistemaPrincipal {
         System.out.println("3. Solicitar entrega encomienda");
         System.out.println("4. Consultar servicios");
     }
+
     public static void mostrarMenuConductor() {
         System.out.println("/********MENÚ********/");
         System.out.println("/*                  */");
         System.out.println("/********************/");
         System.out.println("1. Consultar servicio asignado");
     }
+
     private static boolean validarcliente(String Nombrearchivo, usuario usuario) {
         FileReader fr = null;
         BufferedReader br = null;
@@ -230,15 +267,16 @@ public class SistemaPrincipal {
             while ((linea = br.readLine()) != null) {
                 String[] datos;
                 datos = linea.split(",");
-                String cedula=datos[0];
-                if(cedula.equals(usuario.getNro_cedula())){
-                    valor=true;
+                String cedula = datos[0];
+                if (cedula.equals(usuario.getNro_cedula())) {
+                    valor = true;
                 }
             }
+        } catch (Exception e) {
         }
-        catch(Exception e){     
-        }
-    return valor;}
+        return valor;
+    }
+
     public ArrayList<Plato> crearMenu(String nombreArchivo, Restaurante restaurante) {
         File archivo = null;
         FileReader fr = null;
@@ -279,18 +317,19 @@ public class SistemaPrincipal {
         }
         return restaurante.getListamenu();
     }
-    public static void registrar_cliente(int edad,String Nro_tarjetacredito,String cedula, String nombreArchivo){
+
+    public static void registrar_cliente(int edad, String Nro_tarjetacredito, String cedula, String nombreArchivo) {
         FileWriter fichero = null;
         BufferedWriter bw = null;
         PrintWriter pw = null;
         try {
-            fichero = new FileWriter(nombreArchivo,true);
+            fichero = new FileWriter(nombreArchivo, true);
             bw = new BufferedWriter(fichero);
-            String Edad=String.valueOf(edad);
-            bw.write(cedula+",");
-            bw.write(Edad+",");
-            bw.write(Nro_tarjetacredito+"\n");
-           
+            String Edad = String.valueOf(edad);
+            bw.write(cedula + ",");
+            bw.write(Edad + ",");
+            bw.write(Nro_tarjetacredito + "\n");
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -304,7 +343,5 @@ public class SistemaPrincipal {
             }
         }
     }
-    
-            
 
 }
