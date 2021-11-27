@@ -33,7 +33,7 @@ public class ServicioDelivery extends Servicio {
         return "ServicioDelivery{" + "pedido=" + pedido + '}';
     }
 
-    public static Servicio crearServicioDelivery() {
+    public static int crearServicioDelivery(Cliente c) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Ingrese la fecha: ");
         String fecha_de = sc.nextLine();
@@ -46,6 +46,6 @@ public class ServicioDelivery extends Servicio {
 
         Servicio Delivery = new ServicioDelivery(ruta_de, fecha_de, "1234", "Williams restaurant");
         sc.close();
-        return Delivery;
+        return 0;
     }
 }

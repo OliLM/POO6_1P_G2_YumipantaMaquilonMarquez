@@ -31,23 +31,22 @@ public class ServicioTaxi extends Servicio {
     }
 
     public static int crearServicioTaxi(Cliente cliente_A) {
-//        Scanner sc = new Scanner(System.in);
+//        Scanner sc= new Scanner(System.in);
 //        System.out.print("Ingrese la fecha: ");
-//        String fecha_t = sc.nextLine();
+//        String fecha_t= sc.nextLine();
 //        System.out.print("Ingrese punto de partida: ");
-//        String p_inicio = sc.nextLine();
+//        String p_inicio= sc.nextLine();
 //        System.out.print("Ingrese punto de llegada: ");
-//        String p_llegada = sc.nextLine();
-//        Ruta ruta_t = new Ruta(p_inicio, p_llegada);
+//        String p_llegada= sc.nextLine();
+//        Ruta ruta_t= new Ruta(p_inicio,p_llegada);
 //        System.out.print("Ingrese la cantidad de personas que viajaran: ");
-//        int cantidad_p = sc.nextInt();
+//        int cantidad_p= sc.nextInt();
 //        sc.nextLine();
 //        //comienzo
-//        Ruta ruta = new Ruta(p_inicio, p_llegada);
-//        Servicio Taxi = new ServicioTaxi(ruta, fecha_t, cantidad_p);
+//        Ruta ruta=new Ruta(p_inicio,p_llegada);
+//        Servicio Taxi= new ServicioTaxi(ruta,fecha_t,cantidad_p);
 //        sc.close();
 //        return Taxi;
-        
         int validarWhile=0;
         Scanner sc = new Scanner(System.in);
         System.out.println("Ingrese su ubicacion:");
@@ -67,17 +66,26 @@ public class ServicioTaxi extends Servicio {
         if (confirmacion.equals("si")) {
             String tipoVehiculo="A";
             String conductor = taxi.asignarconductor(tipoVehiculo);
-            String linea = taxi.getCodigo() + "," + cliente_A.getNombre() + "," + conductor + taxi.getRuta().getpuntoPartida() + "," + taxi.getRuta().getpuntoLlegada() + "," + taxi.getfecha() + "," + taxi.getcantidadPersonas() + "," + metodo + taxi.getvalorPagar();
+            String linea = "\n"+taxi.getCodigo() + "," + cliente_A.getNombre() + "," + conductor + taxi.getRuta().getpuntoPartida() + "," + taxi.getRuta().getpuntoLlegada() + "," + taxi.getfecha() + "," + taxi.getcantidadPersonas() + "," + metodo +","+ taxi.getvalorPagar();
             Archivos.EscribirArchivo("viajes.txt", linea);
-            System.out.println("\\=============Factura=============//\n" + taxi.toString());
+            System.out.println("**=============Factura=============**\n" + taxi.toString());
+            //=======================inicio============
+            Servicio taxi2 =(Servicio)taxi;
+            cliente_A.setListaServicio(taxi2);
+            
+            
+            //========================fin===================
+            
+            
             System.out.println("¿Desea Solicitar otro Servicio? (si/no): ");
             String validar=sc.nextLine();
+            
             if (validar.equals("si"))
-                validarWhile = 0;
-            else if(validar.equals("no"))
                 validarWhile = 1;
+            else if(validar.equals("no"))
+                validarWhile = 0;
 
-            validarWhile = 0;
+            
         } else {
             validarWhile = 1;
         }

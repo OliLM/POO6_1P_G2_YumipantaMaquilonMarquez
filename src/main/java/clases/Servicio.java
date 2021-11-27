@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -16,51 +17,44 @@ import java.util.Scanner;
  * @author DELL
  */
 public class Servicio {
-
     protected Ruta ruta;
     protected String conductor;
     protected String fecha;
     protected double valorPagar;//cambio
     protected String codigo;
-
-    public Servicio(Ruta ruta, String fecha) {
-        this.ruta = ruta;
-        this.fecha = fecha;
-        this.valorPagar = 50;//cambio
-        this.codigo = String.valueOf((int) (Math.random() * 1000000));
-
+    
+    
+    public Servicio(Ruta ruta,String fecha){
+        this.ruta=ruta;
+        this.fecha=fecha;
+        this.valorPagar=50;//cambio
+        this.codigo=String.valueOf((int)(Math.random()*1000000));
+                
     }
-
-    public String getfecha() {
+    public String getfecha(){
         return fecha;
     }
-
-    public void setfecha(String fecha) {
-        this.fecha = fecha;
+    public void setfecha(String fecha){
+     this.fecha=fecha;
     }
-
-    public String getConductor() {
+    public String getConductor(){
         return conductor;
     }
-
-    public void setConductor(String c) {
-        this.conductor = c;
+    public void setConductor(String c){
+        this.conductor= c;
     }
-
-    public Ruta getRuta() {
+    public Ruta getRuta(){
         return ruta;
     }
-
-    public void setRuta(String partida, String llegada) {
-        this.ruta = new Ruta(partida, llegada);
+    public void setRuta(String partida,String llegada){
+        this.ruta=new Ruta(partida,llegada);
     }
-
-    public double getvalorPagar() {
+    
+    public double getvalorPagar(){
         return valorPagar;
     }
-
-    public void setvalorPagar(double valorPagar) {
-        this.valorPagar = valorPagar;
+    public void setvalorPagar(double valorPagar){
+        this.valorPagar=valorPagar;
     }
 
     public String getFecha() {
@@ -70,59 +64,57 @@ public class Servicio {
     public String getCodigo() {
         return codigo;
     }
-
+    
+    
     @Override//comienzo
     public String toString() {
         return ruta.toString() + "\nConductor: " + conductor + "\nFecha: " + fecha + "\nValor a pagar: " + valorPagar + "\nCodigo: " + codigo;
     }
-
     public double calcularPrecio(double precio) {
         double precioFinal = precio;
         return precioFinal;
     }
-
-    public double calcularPrecio(double precio, double incremento) {
-        double precioFinal = precio * incremento;
+    public double calcularPrecio(double precio,  double incremento){
+        double precioFinal = precio*incremento;
         return precioFinal;
     }
-
-    public String metodo_pago() {
-        String metodo = "";
-        double valor = 0;
-        int validar = 1;
-        Scanner sc = new Scanner(System.in);
-        while (validar != 0) {
+    public String metodo_pago(){
+        String metodo="";
+        double valor=0;
+        int validar=1;
+        Scanner sc =new Scanner(System.in);
+        while (validar!=0){
             System.out.println("Elija una opción de pago:\n1.Pago en efectivo\n2.Pago con tarjeta\nIngrese una opcion:");
-            int op = sc.nextInt();
+            int op =sc.nextInt();
             sc.nextLine();
-            switch (op) {
+            switch (op){
                 case 1:
-                    valor = calcularPrecio(valorPagar);
-                    validar = 0;
-                    metodo = "Pago en efectivo";
+                    valor=calcularPrecio(valorPagar);
+                    validar=0;
+                    metodo="Pago en efectivo";
                     break;
                 case 2:
-                    double incremento = 1.10;
-                    valor = calcularPrecio(valorPagar, incremento);
-                    validar = 0;
-                    metodo = "Pago con trajeta";
+                    double incremento =1.10;
+                    valor=calcularPrecio(valorPagar,incremento);
+                    validar=0;
+                    metodo="Pago con trajeta";
                     break;
                 default:
                     System.out.println("Opcion no valida. Vuelva a elegir\n");
-                    validar = 1;
-
+                    validar=1;
+                    
             }
-
+            
         }
-
-        valorPagar = valor;
+        
+        valorPagar=valor;
         return metodo;
     }
-
-    public String asignarconductor(String tipoVehiculo) {
-        String conductor = "";
-
-        String nombrearchivo = "conductoresApp.txt";
+    
+    public String asignarconductor(String tipoVehiculo){
+        String conductor="";
+        
+        String nombrearchivo="conductoresApp.txt";
         File archivo = null;
         FileReader fr = null;
         BufferedReader br = null;
@@ -131,19 +123,20 @@ public class Servicio {
             // Apertura del fichero y creacion de BufferedReader para poder
             // hacer una lectura comoda (disponer del metodo readLine()).
             archivo = new File(nombrearchivo);
-            fr = new FileReader(archivo, StandardCharsets.UTF_8);
+            fr = new FileReader(archivo,StandardCharsets.UTF_8);
             br = new BufferedReader(fr);
 
             // Lectura del fichero
             String linea;
             while ((linea = br.readLine()) != null) {
-                String[] datos = linea.split(",");
-                if (datos[3].equals("D")) {
-                    String tipo = Archivos.tipo("vehiculo.txt", datos[4]);
-                    if (tipo.equals(tipoVehiculo)) {
-                        conductor = datos[0];
+                String[] datos=linea.split(",");
+                if (datos[3].equals("D")){
+                    String tipo=Archivos.tipo("vehiculo.txt", datos[4]);
+                    if (tipo.equals(tipoVehiculo)){
+                       conductor=datos[0]; 
                     }
-
+                    
+                    
                 }
 
             }
@@ -162,9 +155,11 @@ public class Servicio {
                 e2.printStackTrace();
             }
         }
-
-        this.conductor = conductor;
+        
+        
+        this.conductor=conductor;
         return conductor;
     }
 
+        
 }

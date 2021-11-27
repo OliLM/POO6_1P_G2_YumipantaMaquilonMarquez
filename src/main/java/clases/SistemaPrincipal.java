@@ -5,7 +5,9 @@
 package clases;
 
 import Enums.EstadoConductor;
+import Enums.TipoEncomienda;
 import Enums.TipoVehiculo;
+import static clases.Archivos.EscribirArchivo;
 import java.util.Scanner;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -21,11 +23,13 @@ import static clases.ServicioDelivery.crearServicioDelivery;
 public class SistemaPrincipal {
 
     public static void main(String[] args) {
-        //Creacion de archivos txt
+
+        //=============  Inicio============
         Archivos.EscribirArchivo("conductoresApp.txt", "nombre,codigoUsuario,licencia,estado,codigoVehiculo\nLuis,2739,238983,D,23\nJuan,3847,293487,O,12\nMarco,3474,828737,D,15");
         Archivos.EscribirArchivo("vehiculo.txt", "codigoVehiculo,placa,modelo,marca,tipo\n23,GSX3847,CX3,Mazda,A\n12,GSD8475,Aveo,Cherolet,A\n15,GAF9833,I10,Hyundai,M");
         Archivos.EscribirArchivo("viajes.txt", "numeroServicio,nombreCliente,nombreConductor,desde,hasta,fechayhora.numeroPasajeros,tipoPago,valorPagar\n");
 
+        //=============== Fin ===============
         boolean validar = false;
         Scanner sc = new Scanner(System.in);
         System.out.println("Inicio del sistema");
@@ -54,37 +58,41 @@ public class SistemaPrincipal {
                     }
                     System.out.println("Cliente registrado");
                     Cliente cliente_A = (Cliente) User;//Down casting
-                    mostrarMenuCliente();
-                    System.out.println("Ingrese su opcion: ");
-                    int op = sc.nextInt();
-                    sc.nextLine();
+                    
                     int validarWhile = 1;
-                    //while (validarWhile != 0) {
-                    switch (op) {
-                        case 1:
-                            System.out.println("/********SERVICIO TAXI********/");
-                            validarWhile = ServicioTaxi.crearServicioTaxi(cliente_A);
-                            
-                            break;
-                        case 2:
-                            System.out.println("/********SERVICIO ENCOMIENDAS********/");
-                            validarWhile=EntregaEncomiendas.crearServicioEncomienda(cliente_A);
+                    while (validarWhile != 0) {
+                        mostrarMenuCliente();
+                        System.out.println("Ingrese su opcion: ");
+                        int op = sc.nextInt();
+                        sc.nextLine();
 
-                            break;
-                        case 3:
-                            System.out.println("/********SERVICIO DELIVERY COMIDA********/");
-                            crearServicioDelivery();
+                        switch (op) {
+                            case 1:
+                                System.out.println("/********SERVICIO TAXI********/");//ww inicio
+                                validarWhile = ServicioTaxi.crearServicioTaxi(cliente_A);
+//                                
+                                break;
+                            case 2:
+                                System.out.println("/********SERVICIO ENCOMIENDAS********/");
+                                validarWhile = EntregaEncomiendas.crearServicioEncomienda(cliente_A);
 
-                            break;
-                        case 4:
-                            System.out.println("/********CONSULTAR SERVICIO********/");
-                            cliente_A.ConsultarServicioAsignado();
-                            break;
-                        default:
-                            System.out.print("Se cerró el menú");
+                                break;
+                            case 3:
+                                System.out.println("/********SERVICIO DELIVERY COMIDA********/");
+                                ServicioDelivery.crearServicioDelivery(cliente_A);
+                                validarWhile = 0;
+                                break;
+                            case 4:
+                                System.out.println("/********CONSULTAR SERVICIO********/");
+                                cliente_A.ConsultarServicioAsignado();
+                                validarWhile = 0;
+                                break;
+                            default:
+                                System.out.print("Se cerró el menú");
+                                validarWhile = 0;
 
+                        }
                     }
-                    //}
 
                 } else {
                     Conductor conductor_A = (Conductor) User;//Down casting
@@ -109,6 +117,8 @@ public class SistemaPrincipal {
     public static boolean validardatos(String datos) {
         return datos.matches("[a-zA-z]*");
     }
+//    public static boolean validardatos(String datos) {
+//        return datos.matches("[a-zA-z]*");
 
     private static boolean IngresoSistema(String user, String contraseña, String nombrearchivo) {
         boolean encontrado = false;
@@ -170,6 +180,7 @@ public class SistemaPrincipal {
                 if (User.equals(datos[3])) {
                     if (datos[6].charAt(0) == 'R') {
 
+                        //=============  Inicio============
                         String info = Archivos.licenciaEstado("conductoresApp.txt", datos[1]);
                         String[] licenciaEstado = info.split(",");
                         if (licenciaEstado[1].equals("D")) {
@@ -186,8 +197,9 @@ public class SistemaPrincipal {
                         }
                         Conductor conductor = new Conductor(datos[1], datos[2], datos[0], datos[5], datos[3], datos[4], licenciaEstado[0], estado, tipo, datos[6].charAt(0));
                         //Polimorfismo de asignacion
-                        user_final = conductor; 
-                        
+                        user_final = conductor;
+
+                        //=============== Fin ===============
                     } else {
                         Cliente cliente = new Cliente(datos[1], datos[2], datos[0], datos[5], datos[3], datos[4], 25, 56561561, datos[6].charAt(0));
                         //Polimorfismo de asignacion
@@ -317,5 +329,7 @@ public class SistemaPrincipal {
             }
         }
     }
+    
+    
 
 }

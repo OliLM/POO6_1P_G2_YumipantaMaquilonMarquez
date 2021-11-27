@@ -87,12 +87,17 @@ public class EntregaEncomiendas extends Servicio {
             //String linea = encomienda.getCodigo() + "," + cliente_A.getNombre() + "," + conductor + encomienda.getRuta().getpuntoPartida() + "," + encomienda.getRuta().getpuntoLlegada() + "," + encomienda.getfecha() + "," + "," + metodo + encomienda.getvalorPagar();
             //Archivos.EscribirArchivo("viajes.txt", linea);
             System.out.println("**=============Factura=============**\n" + encomienda.toString()+"\n\n");
+            //=======================inicio============
+            Servicio enco =(Servicio)encomienda;
+            cliente_A.setListaServicio(enco);
+            //========================fin===================
+            
             System.out.println("¿Desea Solicitar otro Servicio? (si/no): ");
             String validar=sc.nextLine();
             if (validar.equals("si"))
-                validarWhile = 0;
-            else if(validar.equals("no"))
                 validarWhile = 1;
+            else if(validar.equals("no"))
+                validarWhile = 0;
             
         } else {
             validarWhile = 1;
