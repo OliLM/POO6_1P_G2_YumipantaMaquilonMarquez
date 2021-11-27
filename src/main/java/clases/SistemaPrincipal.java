@@ -62,39 +62,13 @@ public class SistemaPrincipal {
                     //while (validarWhile != 0) {
                     switch (op) {
                         case 1:
-                            System.out.println("/********SERVICIO TAXI********/");//ww inicio
-
-                            System.out.println("Ingrese su ubicacion:");
-                            String ubicacion = sc.nextLine();
-                            System.out.println("Ingrese su destino:");
-                            String destino = sc.nextLine();
-                            Ruta ruta = new Ruta(ubicacion, destino);
-                            System.out.println("Ingrese fecha del viaje en el siguiente formato(5 nov - 10:30):");
-                            String fecha = sc.nextLine();
-                            System.out.println("Ingrese cantidad de personas:");
-                            int personas = sc.nextInt();
-                            sc.nextLine();
-                            ServicioTaxi taxi = new ServicioTaxi(ruta, fecha, personas);
-                            String metodo = taxi.metodo_pago();
-
-                            System.out.println("Desea generar el servicio (si/no)");
-                            String confirmacion = sc.nextLine();
-                            if (confirmacion.equals("si")) {
-                                String conductor = taxi.asignarconductor();
-                                String linea = taxi.getCodigo() + "," + cliente_A.getNombre() + "," + conductor + taxi.getRuta().getpuntoPartida() + "," + taxi.getRuta().getpuntoLlegada() + "," + taxi.getfecha() + "," + taxi.getcantidadPersonas() + "," + metodo + taxi.getvalorPagar();
-                                Archivos.EscribirArchivo("viajes.txt", linea);
-                                System.out.println("Factura:\n" + taxi.toString());
-
-                                validarWhile = 0;
-                            } else {
-                                validarWhile = 1;
-                            }
-
-                            //ww fin
+                            System.out.println("/********SERVICIO TAXI********/");
+                            validarWhile = ServicioTaxi.crearServicioTaxi(cliente_A);
+                            
                             break;
                         case 2:
                             System.out.println("/********SERVICIO ENCOMIENDAS********/");
-                            crearServicioEncomienda();
+                            validarWhile=EntregaEncomiendas.crearServicioEncomienda(cliente_A);
 
                             break;
                         case 3:

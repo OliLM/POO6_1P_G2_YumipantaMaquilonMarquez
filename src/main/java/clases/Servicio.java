@@ -73,7 +73,7 @@ public class Servicio {
 
     @Override//comienzo
     public String toString() {
-        return ruta.toString() + "\nconductor: " + conductor + "\nfecha: " + fecha + "\nvalorPagar: " + valorPagar + "\ncodigo: " + codigo;
+        return ruta.toString() + "\nConductor: " + conductor + "\nFecha: " + fecha + "\nValor a pagar: " + valorPagar + "\nCodigo: " + codigo;
     }
 
     public double calcularPrecio(double precio) {
@@ -119,7 +119,7 @@ public class Servicio {
         return metodo;
     }
 
-    public String asignarconductor() {
+    public String asignarconductor(String tipoVehiculo) {
         String conductor = "";
 
         String nombrearchivo = "conductoresApp.txt";
@@ -140,7 +140,7 @@ public class Servicio {
                 String[] datos = linea.split(",");
                 if (datos[3].equals("D")) {
                     String tipo = Archivos.tipo("vehiculo.txt", datos[4]);
-                    if (tipo.equals("A")) {
+                    if (tipo.equals(tipoVehiculo)) {
                         conductor = datos[0];
                     }
 
