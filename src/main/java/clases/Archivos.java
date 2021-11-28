@@ -96,11 +96,9 @@ public class Archivos {
                 } else{
                     String[] datos=linea.split(",");
                     String primerdato=datos[0];
-                    
                     String[] encabezado=lineaArchivo.split(",");
                     String validarEncabezado=encabezado[0];
-                    
-                    System.out.println(primerdato+"===="+validarEncabezado);
+                    System.out.println("datos: "+datos.length+"   "+"encabezado: "+encabezado.length);
                     if(datos.length != encabezado.length){
 //                        System.out.println(datos.length+"="+encabezado.length);
                         informacion = false;
@@ -181,7 +179,6 @@ public class Archivos {
             fichero = new FileWriter(nombreArchivo, true);
             bw = new BufferedWriter(fichero);
             Boolean validar = validarContenidoArchivo(nombreArchivo, linea);
-            System.out.println("Este "+validar);
             if (validar == true) {
                 bw.write(linea+"\n");
             } else {

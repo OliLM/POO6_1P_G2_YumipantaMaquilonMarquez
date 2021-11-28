@@ -82,8 +82,8 @@ public class Usuario {
         this.contraseña = contraseña;
     }
    
-   public void ConsultarServicioAsignado(){
-       
+   public int ConsultarServicioAsignado(){
+       return 1;
    }
     
    @Override

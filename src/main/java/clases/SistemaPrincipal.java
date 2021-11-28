@@ -23,12 +23,12 @@ import static clases.ServicioDelivery.crearServicioDelivery;
 public class SistemaPrincipal {
 
     public static void main(String[] args) {
-        
+
         //=============  Inicio============
         Archivos.EscribirArchivo("conductoresApp.txt", "nombre,codigoUsuario,licencia,estado,codigoVehiculo\nAlex,2739,238983,D,23\nJuan,3847,293487,D,12\nPedro,3474,828737,D,15");
         Archivos.EscribirArchivo("vehiculo.txt", "codigoVehiculo,placa,modelo,marca,tipo\n23,GSX3847,CX3,Mazda,A\n12,GSD8475,Aveo,Cherolet,A\n15,GAF9833,I10,Hyundai,M");
         Archivos.EscribirArchivo("viajes.txt", "numeroServicio,nombreCliente,nombreConductor,desde,hasta,fecha,hora,numeroPasajeros,tipoPago,valorPagar");
-        Archivos.EscribirArchivo("encomiendas.txt","numeroServicio,nombreCliente,nombreConductor,desde,hasta,fecha,hora,tipoEncomienda,cantidadProductos,tipoPago,valorPagar");
+        Archivos.EscribirArchivo("encomiendas.txt", "numeroServicio,nombreCliente,nombreConductor,desde,hasta,fecha,hora,tipoEncomienda,cantidadProductos,tipoPago,valorPagar");
         //=============== Fin ===============
         boolean validar = false;
         Scanner sc = new Scanner(System.in);
@@ -57,7 +57,7 @@ public class SistemaPrincipal {
                     }
                     System.out.println("Cliente registrado");
                     Cliente cliente_A = (Cliente) User;//Down casting
-                    
+
                     int validarWhile = 1;
                     while (validarWhile != 0) {
                         mostrarMenuCliente();
@@ -83,29 +83,36 @@ public class SistemaPrincipal {
                                 break;
                             case 4:
                                 System.out.println("/********CONSULTAR SERVICIO********/");
-                                cliente_A.ConsultarServicioAsignado();
-                                validarWhile = 0;
+                                validarWhile = cliente_A.ConsultarServicioAsignado();
+
                                 break;
                             default:
-                                System.out.print("Se cerró el menú");
-                                validarWhile = 0;
+                                System.out.print("Opcion no valida. Vuelva a seleccionar.");
+                                validarWhile = 1;
+                                break;
 
                         }
                     }
 
                 } else {
                     Conductor conductor_A = (Conductor) User;//Down casting
-                    mostrarMenuConductor();
-                    System.out.println("Ingrese su opcion: ");
-                    int op = sc.nextInt();
-                    sc.nextLine();
-                    switch (op) {
-                        case 1:
-                            System.out.println("/********CONSULTAR SERVICIO********/");
-                            conductor_A.ConsultarServicioAsignado();
-                            break;
-                        default:
-                            System.out.print("Se cerró el menú");
+                    int validarWhile = 1;
+                    while (validarWhile != 0) {
+
+                        mostrarMenuConductor();
+                        System.out.println("Ingrese su opcion: ");
+                        int op = sc.nextInt();
+                        sc.nextLine();
+                        switch (op) {
+                            case 1:
+                                System.out.println("/********CONSULTAR SERVICIO********/");
+                                validarWhile = conductor_A.ConsultarServicioAsignado();
+                                break;
+                            default:
+                                System.out.println("Opcion no valida. Vuelva a seleccionar.");
+                                validarWhile = 1;
+                                break;
+                        }
                     }
 
                 }
@@ -328,7 +335,5 @@ public class SistemaPrincipal {
             }
         }
     }
-    
-    
 
 }

@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -20,7 +21,7 @@ public class Conductor extends Usuario {
     private String licencia;
     private EstadoConductor estado;
     private TipoVehiculo vehiculo;
-    private ArrayList<String> serviciosAsignados=new ArrayList<>();
+    private ArrayList<String> serviciosAsignados = new ArrayList<>();
 
     public Conductor(String nombre, String apellido, String nro_cedula, String celular, String usuario, String contraseña, String licencia, EstadoConductor estado, TipoVehiculo vehiculo, char tipo) {
         super(nombre, apellido, nro_cedula, celular, usuario, contraseña, tipo);
@@ -55,15 +56,27 @@ public class Conductor extends Usuario {
     }
 
     @Override
-    public void ConsultarServicioAsignado() {
+    public int ConsultarServicioAsignado() {
+        Scanner sc = new Scanner(System.in);
+        int validarWhile = 1;
         leerArchivoServicio();
-        if(serviciosAsignados.size()==0){
+        if (serviciosAsignados.size() == 0) {
             System.out.print(serviciosAsignados.size());
-            System.out.print("Conductor sin servicios, se está trabajando");
-        }else
-            for(String servicios: serviciosAsignados){
-            System.out.print(servicios);
+            System.out.println("Conductor sin servicios, se está trabajando");
+        } else {
+            for (String servicios : serviciosAsignados) {
+                System.out.println(servicios);
+            }
         }
+        System.out.println("¿Desea Solicitar otro Servicio? (si/no): ");
+        String validar = sc.nextLine();
+
+        if (validar.equals("si")) {
+            validarWhile = 1;
+        } else if (validar.equals("no")) {
+            validarWhile = 0;
+        }
+        return validarWhile;
     }
 
     @Override
@@ -91,13 +104,13 @@ public class Conductor extends Usuario {
                 String linea;
                 while ((linea = br.readLine()) != null) {
                     String[] datos = linea.split(",");
-                    for(String nombre:datos){
-                        if(nombre.equals(this.nombre)){
-                            if (nombreArchivo.equals("viajes.txt")){
-                                String servicio ="Usted tiene asignado el Servicio Taxi\nDesde: "+datos[3]+"\nHasta: "+datos[4]+"\nFecha: "+datos[5]+"\nHora: "+datos[6]+"\nCantidad de personas: "+datos[7]+"\n\n";
+                    for (String nombre : datos) {
+                        if (nombre.equals(this.nombre)) {
+                            if (nombreArchivo.equals("viajes.txt")) {
+                                String servicio = "Usted tiene asignado el Servicio Taxi\nDesde: " + datos[3] + "\nHasta: " + datos[4] + "\nFecha: " + datos[5] + "\nHora: " + datos[6] + "\nCantidad de personas: " + datos[7] + "\n\n";
                                 serviciosAsignados.add(servicio);
                             }
-                            
+
                         }
                     }
 
