@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class SistemaPrincipal {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //=============  Inicio============
         Archivos.EscribirArchivo("conductoresApp.txt", "nombre,codigoUsuario,licencia,estado,codigoVehiculo\nAlex,2739,238983,D,23\nJuan,3847,293487,D,12\nPedro,3474,828737,D,15");
         Archivos.EscribirArchivo("vehiculo.txt", "codigoVehiculo,placa,modelo,marca,tipo\n23,GSX3847,CX3,Mazda,A\n12,GSD8475,Aveo,Cherolet,A\n15,GAF9833,I10,Hyundai,M");
@@ -50,8 +50,7 @@ public class SistemaPrincipal {
                         int edad = sc.nextInt();
                         System.out.println("Ingres el numero de tarjeta de credito");
                         String tarjeta = sc.next();
-                        Cliente.registrar_cliente(edad, tarjeta, User.getNro_cedula(), "Clientes.txt");
-                        
+                        Cliente.registrar_cliente(edad, tarjeta, User.getNro_cedula(), "Clientes.txt");                  
                     }
                     System.out.println("Cliente registrado");
                     Cliente cliente_A = (Cliente) User;//Down casting
@@ -60,8 +59,11 @@ public class SistemaPrincipal {
                     int op=0;
                     String ops;
                     while (validarWhile != 0) {
+
                         mostrarMenuCliente();
                        op=pedirDatosEnteros();
+                        cliente_A.mostrarMenu();
+
                         switch (op) {
                             case 1:
                                 System.out.println("/********SERVICIO TAXI********/");
@@ -95,7 +97,7 @@ public class SistemaPrincipal {
                     int validarWhile = 1;
                     while (validarWhile != 0) {
 
-                        mostrarMenuConductor();
+                        conductor_A.mostrarMenu();
                         System.out.println("Ingrese su opcion: ");
                         int op = sc.nextInt();
                         sc.nextLine();
@@ -194,6 +196,12 @@ return validar;
         System.out.println("/********************/");
         System.out.println("1. Consultar servicio asignado");
     }
+
+
+ 
+
+
+
     public static Usuario Crear_usuario(String nombrearchivo, String User) {
         File archivo = null;
         FileReader fr = null;

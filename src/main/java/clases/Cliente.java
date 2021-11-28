@@ -51,7 +51,18 @@ public class Cliente extends Usuario {
         this.listaServicio.add(servicio);
     }
     //========================fin===================
-
+    
+    @Override
+    public void mostrarMenu(){
+        super.mostrarMenu();
+        System.out.println("1. Solicitar servicio de taxi");
+        System.out.println("2. Solicitar servicio de encomienda");
+        System.out.println("3. Solicitar servicio de comida");
+        System.out.println("4. Consultar servicios");
+    }
+    
+    
+    
     @Override
     public int ConsultarServicioAsignado() {
         Scanner sc = new Scanner(System.in);

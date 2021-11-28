@@ -78,6 +78,16 @@ public class Conductor extends Usuario {
         }
         return validarWhile;
     }
+
+
+    
+    @Override
+    public void mostrarMenu(){
+        super.mostrarMenu();
+        System.out.println("1. Consultar servicio asignado");
+    }
+    
+
     @Override
     public String toString() {
         return super.toString() + "[ Licencia: " + getLicencia() + " Estado: " + getEstado() + " Vehiculo: " + getVehiculo() + "]";

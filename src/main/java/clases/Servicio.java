@@ -111,6 +111,16 @@ public class Servicio {
         return metodo;
     }
     
+    public double calcularTotalServicios(String pago, double subtotal){
+        double total=subtotal;
+        if(pago.equals("Tarjeta de credito")){
+            total=((subtotal*0.10)+subtotal);
+        }
+        
+        return total;
+    }
+    
+    
     public String asignarconductor(String tipoVehiculo){
         String conductor="";
         
