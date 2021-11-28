@@ -12,9 +12,6 @@ import java.util.Scanner;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import static clases.EntregaEncomienda.crearServicioEncomienda;
-import static clases.ServicioDelivery.crearServicioDelivery;
-//import static clases.ServicioTaxi.crearServicioTaxi;
 
 /**
  *
@@ -46,13 +43,13 @@ public class SistemaPrincipal {
                 validar = true;
                 Usuario User = Crear_usuario("usuarios.txt", Usuario);
                 if (User.getTipo() == 'C') {
-                    if (validarcliente("Clientes.txt", User) == false) {
+                    if (Cliente.validarcliente("Clientes.txt", User) == false) {
                         System.out.println("Cliente no registrado");
                         System.out.println("Ingrese su edad");
                         int edad = sc.nextInt();
                         System.out.println("Ingres el numero de tarjeta de credito");
                         String tarjeta = sc.next();
-                        registrar_cliente(edad, tarjeta, User.getNro_cedula(), "Clientes.txt");
+                        Cliente.registrar_cliente(edad, tarjeta, User.getNro_cedula(), "Clientes.txt");
                     }
                     System.out.println("Cliente registrado");
                     Cliente cliente_A = (Cliente) User;//Down casting
@@ -122,8 +119,6 @@ public class SistemaPrincipal {
     public static boolean validardatos(String datos) {
         return datos.matches("[a-zA-z]*");
     }
-
-
     private static boolean IngresoSistema(String user, String contraseña, String nombrearchivo) {
         boolean encontrado = false;
         File archivo = null;
@@ -164,7 +159,23 @@ public class SistemaPrincipal {
 
     }
 
-    private static Usuario Crear_usuario(String nombrearchivo, String User) {
+ 
+    public static void mostrarMenuCliente() {
+        System.out.println("/********MENÚ********/");
+        System.out.println("/*                  */");
+        System.out.println("/********************/");
+        System.out.println("1. Solicitar servicio de taxi");
+        System.out.println("2. Solicitar servicio de encomienda");
+        System.out.println("3. Solicitar servicio de comida");
+        System.out.println("4. Consultar servicios");
+    }
+    public static void mostrarMenuConductor() {
+        System.out.println("/********MENÚ********/");
+        System.out.println("/*                  */");
+        System.out.println("/********************/");
+        System.out.println("1. Consultar servicio asignado");
+    }
+    public static Usuario Crear_usuario(String nombrearchivo, String User) {
         File archivo = null;
         FileReader fr = null;
         BufferedReader br = null;
@@ -185,14 +196,14 @@ public class SistemaPrincipal {
                     if (datos[6].charAt(0) == 'R') {
 
                         //=============  Inicio============
-                        String info = Archivos.licenciaEstado("conductoresApp.txt", datos[1]);
+                        String info = Conductor.licenciaEstado("conductoresApp.txt", datos[1]);
                         String[] licenciaEstado = info.split(",");
                         if (licenciaEstado[1].equals("D")) {
                             estado = EstadoConductor.DISPONIBLE;
                         } else {
                             estado = EstadoConductor.EN_SERVICIO;
                         }
-                        String informacion = Archivos.tipo("vehiculo.txt", licenciaEstado[2]);
+                        String informacion = Conductor.tipo("vehiculo.txt", licenciaEstado[2]);
                         TipoVehiculo tipo = TipoVehiculo.AUTO;
                         if (informacion.equals("A")) {
                             tipo = TipoVehiculo.AUTO;
@@ -225,113 +236,8 @@ public class SistemaPrincipal {
         }
         return user_final;
     }
+   
 
-    public static void mostrarMenuCliente() {
-        System.out.println("/********MENÚ********/");
-        System.out.println("/*                  */");
-        System.out.println("/********************/");
-        System.out.println("1. Solicitar servicio de taxi");
-        System.out.println("2. Solicitar servicio de encomienda");
-        System.out.println("3. Solicitar servicio de comida");
-        System.out.println("4. Consultar servicios");
-    }
-
-    public static void mostrarMenuConductor() {
-        System.out.println("/********MENÚ********/");
-        System.out.println("/*                  */");
-        System.out.println("/********************/");
-        System.out.println("1. Consultar servicio asignado");
-    }
-
-    private static boolean validarcliente(String Nombrearchivo, Usuario usuario) {
-        FileReader fr = null;
-        BufferedReader br = null;
-        String linea;
-        String Encabezado;
-        File archivo;
-        boolean valor = false;
-        try {
-            archivo = new File(Nombrearchivo);
-            fr = new FileReader(archivo, StandardCharsets.UTF_8);
-            br = new BufferedReader(fr);
-            while ((linea = br.readLine()) != null) {
-                String[] datos;
-                datos = linea.split(",");
-                String cedula = datos[0];
-                if (cedula.equals(usuario.getNro_cedula())) {
-                    valor = true;
-                }
-            }
-        } catch (Exception e) {
-        }
-        return valor;
-    }
-
-    public ArrayList<Plato> crearMenu(String nombreArchivo, Restaurante restaurante) {
-        File archivo = null;
-        FileReader fr = null;
-        BufferedReader br = null;
-        String linea;
-        String Encabezado;
-
-        ArrayList<Plato> listaPlato = new ArrayList();
-        try {
-
-            archivo = new File(nombreArchivo);
-            fr = new FileReader(archivo, StandardCharsets.UTF_8);
-            br = new BufferedReader(fr);
-            Encabezado = br.readLine();
-
-            while ((linea = br.readLine()) != null) {
-                String[] datos;
-                datos = linea.split(",");
-
-                if (restaurante.getCodigo() == Integer.valueOf(datos[0])) {
-                    Plato plato = new Plato(datos[1], Double.parseDouble(datos[3]), Integer.valueOf(datos[0]));
-                    listaPlato.add(plato);
-
-                }
-            }
-            restaurante.setListamenu(listaPlato);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-
-            try {
-                if (null != fr) {
-                    fr.close();
-                }
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
-        }
-        return restaurante.getListamenu();
-    }
-
-    public static void registrar_cliente(int edad, String Nro_tarjetacredito, String cedula, String nombreArchivo) {
-        FileWriter fichero = null;
-        BufferedWriter bw = null;
-        PrintWriter pw = null;
-        try {
-            fichero = new FileWriter(nombreArchivo, true);
-            bw = new BufferedWriter(fichero);
-            String Edad = String.valueOf(edad);
-            bw.write(cedula + ",");
-            bw.write(Edad + ",");
-            bw.write(Nro_tarjetacredito + "\n");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (null != fichero) {
-                    //fichero.close();
-                    bw.close();
-                }
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
-        }
-    }
+    
 
 }

@@ -4,6 +4,13 @@
  */
 package clases;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -79,6 +86,54 @@ public class Cliente extends Usuario {
     @Override
     public String toString() {
         return super.toString() + "[ Edad: " + getEdad() + " Nro.Tarjeta: " + getNro_tarjeta() + "]";
+    }
+    public static boolean validarcliente(String Nombrearchivo, Usuario usuario) {
+        FileReader fr = null;
+        BufferedReader br = null;
+        String linea;
+        String Encabezado;
+        File archivo;
+        boolean valor = false;
+        try {
+            archivo = new File(Nombrearchivo);
+            fr = new FileReader(archivo, StandardCharsets.UTF_8);
+            br = new BufferedReader(fr);
+            while ((linea = br.readLine()) != null) {
+                String[] datos;
+                datos = linea.split(",");
+                String cedula = datos[0];
+                if (cedula.equals(usuario.getNro_cedula())) {
+                    valor = true;
+                }
+            }
+        } catch (Exception e) {
+        }
+        return valor;
+    }
+    public static void registrar_cliente(int edad, String Nro_tarjetacredito, String cedula, String nombreArchivo) {
+        FileWriter fichero = null;
+        BufferedWriter bw = null;
+        PrintWriter pw = null;
+        try {
+            fichero = new FileWriter(nombreArchivo, true);
+            bw = new BufferedWriter(fichero);
+            String Edad = String.valueOf(edad);
+            bw.write(cedula + ",");
+            bw.write(Edad + ",");
+            bw.write(Nro_tarjetacredito + "\n");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != fichero) {
+                    //fichero.close();
+                    bw.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
     }
 
 }

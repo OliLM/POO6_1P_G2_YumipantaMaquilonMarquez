@@ -5,6 +5,13 @@
  */
 package clases;
 
+import Enums.EstadoConductor;
+import Enums.TipoVehiculo;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.nio.charset.StandardCharsets;
+
 /**
  *
  * @author ismael123
@@ -90,6 +97,7 @@ public class Usuario {
    public String toString(){
        return "[Nombre: "+getNombre()+" "+getApellido()+" Usuario: "+getUsuario()+" Nro.Cedula: "+getNro_cedula()+" Celular: "+getCelular()+"]";
    }
+   
    
    
    

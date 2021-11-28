@@ -131,7 +131,7 @@ public class Servicio {
             while ((linea = br.readLine()) != null) {
                 String[] datos=linea.split(",");
                 if (datos[3].equals("D")){
-                    String tipo=Archivos.tipo("vehiculo.txt", datos[4]);
+                    String tipo=Conductor.tipo("vehiculo.txt", datos[4]);
                     if (tipo.equals(tipoVehiculo)){
                        conductor=datos[0]; 
                     }
