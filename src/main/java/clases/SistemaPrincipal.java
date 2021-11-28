@@ -117,8 +117,7 @@ public class SistemaPrincipal {
     public static boolean validardatos(String datos) {
         return datos.matches("[a-zA-z]*");
     }
-//    public static boolean validardatos(String datos) {
-//        return datos.matches("[a-zA-z]*");
+
 
     private static boolean IngresoSistema(String user, String contraseña, String nombrearchivo) {
         boolean encontrado = false;

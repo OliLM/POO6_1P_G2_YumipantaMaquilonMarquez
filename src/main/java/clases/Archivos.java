@@ -22,29 +22,6 @@ import java.util.Scanner;
  */
 public class Archivos {
     double valorPagar;
-    public static void main(String[] args){
-        
-//        EscribirArchivo("conductoresApp.txt", "nombre,codigoUsuario,licencia,estado,codigoVehiculo\nLuis,2739,238983,D,23\nJuan,3847,293487,O,12\nMarco,3474,828737,D,15");
-//        
-//        String info=licenciaEstado("conductoresApp.txt","Marco");
-//        System.out.println(info);
-
-
-//        Archivos a=new Archivos();
-//        a.metodo_pago();
-//        System.out.println(a.getValorPagar());
-
-
-
-        String letra = "D";
-        
-        System.out.println(letra.equals("D"));
-                
-
-
-    }
-    
-    
     public static void EscribirArchivo(String nombreArchivo, String linea) {
 
         FileWriter fichero = null;
