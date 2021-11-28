@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class SistemaPrincipal {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //=============  Inicio============
         Archivos.EscribirArchivo("conductoresApp.txt", "nombre,codigoUsuario,licencia,estado,codigoVehiculo\nAlex,2739,238983,D,23\nJuan,3847,293487,D,12\nPedro,3474,828737,D,15");
         Archivos.EscribirArchivo("vehiculo.txt", "codigoVehiculo,placa,modelo,marca,tipo\n23,GSX3847,CX3,Mazda,A\n12,GSD8475,Aveo,Cherolet,A\n15,GAF9833,I10,Hyundai,M");
@@ -56,7 +56,7 @@ public class SistemaPrincipal {
 
                     int validarWhile = 1;
                     while (validarWhile != 0) {
-                        mostrarMenuCliente();
+                        cliente_A.mostrarMenu();
                         System.out.println("Ingrese su opcion: ");
                         int op = sc.nextInt();
                         sc.nextLine();
@@ -95,7 +95,7 @@ public class SistemaPrincipal {
                     int validarWhile = 1;
                     while (validarWhile != 0) {
 
-                        mostrarMenuConductor();
+                        conductor_A.mostrarMenu();
                         System.out.println("Ingrese su opcion: ");
                         int op = sc.nextInt();
                         sc.nextLine();
@@ -160,21 +160,8 @@ public class SistemaPrincipal {
     }
 
  
-    public static void mostrarMenuCliente() {
-        System.out.println("/********MENÚ********/");
-        System.out.println("/*                  */");
-        System.out.println("/********************/");
-        System.out.println("1. Solicitar servicio de taxi");
-        System.out.println("2. Solicitar servicio de encomienda");
-        System.out.println("3. Solicitar servicio de comida");
-        System.out.println("4. Consultar servicios");
-    }
-    public static void mostrarMenuConductor() {
-        System.out.println("/********MENÚ********/");
-        System.out.println("/*                  */");
-        System.out.println("/********************/");
-        System.out.println("1. Consultar servicio asignado");
-    }
+
+
     public static Usuario Crear_usuario(String nombrearchivo, String User) {
         File archivo = null;
         FileReader fr = null;

@@ -7,7 +7,10 @@ package clases;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
@@ -48,7 +51,10 @@ public class Restaurante {
         this.listamenu = listamenu;
     }
     
+    
 
+    
+    
     @Override
     public String toString() {
         return "Restaurante{" + "nombre=" + nombre + ", codigo=" + codigo + ", listamenu=" + listamenu + '}';
@@ -93,4 +99,19 @@ public class Restaurante {
         }
         return restaurante.getListamenu();
     }
+     
+     
+     public static ArrayList<Restaurante> crearRestaurante(String ruta) throws FileNotFoundException, IOException{
+         ArrayList<Restaurante> l_restaurante= new ArrayList<>();
+        String linea;
+        FileReader ar= new FileReader(ruta);
+        BufferedReader li= new BufferedReader(ar);
+        while((linea= li.readLine())!=null){
+            String[] datos= linea.split(",");
+            Restaurante r= new Restaurante(datos[1],Integer.parseInt(datos[0]));
+            l_restaurante.add(r);
+        }
+        li.close();
+        return l_restaurante;
+     }
 }
