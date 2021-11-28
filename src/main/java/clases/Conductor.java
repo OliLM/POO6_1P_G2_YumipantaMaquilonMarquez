@@ -78,12 +78,10 @@ public class Conductor extends Usuario {
         }
         return validarWhile;
     }
-
     @Override
     public String toString() {
         return super.toString() + "[ Licencia: " + getLicencia() + " Estado: " + getEstado() + " Vehiculo: " + getVehiculo() + "]";
     }
-
     private void leerArchivoServicio() {
         String informacion = "";
         File archivo = null;
@@ -110,7 +108,12 @@ public class Conductor extends Usuario {
                                 String servicio = "Usted tiene asignado el Servicio Taxi\nDesde: " + datos[3] + "\nHasta: " + datos[4] + "\nFecha: " + datos[5] + "\nHora: " + datos[6] + "\nCantidad de personas: " + datos[7] + "\n\n";
                                 serviciosAsignados.add(servicio);
                             }
-
+                            if(nombreArchivo.equals("encomiendas.txt")){
+                               String Servicio="Usted Tiene asignado el servicio de encomienda: \nTipo de encomienda: "+datos[7]+"\nCantidad: "+datos[8]+"\nFecha: "+datos[5]+"\nHora "+datos[6]+"\nDesde: "+datos[3]+"\nHasta: "+datos[4];
+                               serviciosAsignados.add(Servicio);
+                            }
+                            
+                                
                         }
                     }
 

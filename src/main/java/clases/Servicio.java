@@ -20,14 +20,14 @@ public class Servicio {
     protected Ruta ruta;
     protected String conductor;
     protected String fecha;
-    protected double valorPagar;//cambio
+    protected static double valorPagar;//cambio
     protected String codigo;
     
     
     public Servicio(Ruta ruta,String fecha){
         this.ruta=ruta;
         this.fecha=fecha;
-        this.valorPagar=50;//cambio
+        this.valorPagar=Math.random();//cambio
         this.codigo=String.valueOf((int)(Math.random()*1000000));
                 
     }
@@ -70,15 +70,15 @@ public class Servicio {
     public String toString() {
         return ruta.toString() + "\nConductor: " + conductor + "\nFecha: " + fecha + "\nValor a pagar: " + valorPagar + "\nCodigo: " + codigo;
     }
-    public double calcularPrecio(double precio) {
+    public static double calcularPrecio(double precio) {
         double precioFinal = precio;
         return precioFinal;
     }
-    public double calcularPrecio(double precio,  double incremento){
+    public static double calcularPrecio(double precio,  double incremento){
         double precioFinal = precio*incremento;
         return precioFinal;
     }
-    public String metodo_pago(){
+    public static String metodo_pago(){
         String metodo="";
         double valor=0;
         int validar=1;

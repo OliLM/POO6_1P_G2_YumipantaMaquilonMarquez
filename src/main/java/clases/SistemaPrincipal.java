@@ -25,6 +25,7 @@ public class SistemaPrincipal {
         Archivos.EscribirArchivo("vehiculo.txt", "codigoVehiculo,placa,modelo,marca,tipo\n23,GSX3847,CX3,Mazda,A\n12,GSD8475,Aveo,Cherolet,A\n15,GAF9833,I10,Hyundai,M");
         Archivos.EscribirArchivo("viajes.txt", "numeroServicio,nombreCliente,nombreConductor,desde,hasta,fecha,hora,numeroPasajeros,tipoPago,valorPagar");
         Archivos.EscribirArchivo("encomiendas.txt", "numeroServicio,nombreCliente,nombreConductor,desde,hasta,fecha,hora,tipoEncomienda,cantidadProductos,tipoPago,valorPagar");
+       ;
         //=============== Fin ===============
         boolean validar = false;
         Scanner sc = new Scanner(System.in);
@@ -50,17 +51,17 @@ public class SistemaPrincipal {
                         System.out.println("Ingres el numero de tarjeta de credito");
                         String tarjeta = sc.next();
                         Cliente.registrar_cliente(edad, tarjeta, User.getNro_cedula(), "Clientes.txt");
+                        
                     }
                     System.out.println("Cliente registrado");
                     Cliente cliente_A = (Cliente) User;//Down casting
-
                     int validarWhile = 1;
+                    int o;
+                    int op=0;
+                    String ops;
                     while (validarWhile != 0) {
                         mostrarMenuCliente();
-                        System.out.println("Ingrese su opcion: ");
-                        int op = sc.nextInt();
-                        sc.nextLine();
-
+                       op=pedirDatosEnteros();
                         switch (op) {
                             case 1:
                                 System.out.println("/********SERVICIO TAXI********/");
@@ -80,7 +81,6 @@ public class SistemaPrincipal {
                             case 4:
                                 System.out.println("/********CONSULTAR SERVICIO********/");
                                 validarWhile = cliente_A.ConsultarServicioAsignado();
-
                                 break;
                             default:
                                 System.out.print("Opcion no valida. Vuelva a seleccionar.");
@@ -118,6 +118,27 @@ public class SistemaPrincipal {
 
     public static boolean validardatos(String datos) {
         return datos.matches("[a-zA-z]*");
+    }
+    private static boolean validardatosEnteros(String datos){
+        int n=0; 
+        boolean validar= datos.matches("[0-20]"); 
+return validar;        
+    }
+    public static int pedirDatosEnteros(){
+        int n=0;
+        Scanner sc=new Scanner(System.in);
+        while(n==0){
+             System.out.println("Ingrese el numero");
+          String ops=sc.next();
+            if(validardatosEnteros(ops)!=true){
+             System.out.println("debe ingresar datos validos");
+            }else{
+                n=Integer.parseInt(ops);  
+            }   
+            
+        } 
+        
+       return n; 
     }
     private static boolean IngresoSistema(String user, String contraseña, String nombrearchivo) {
         boolean encontrado = false;
@@ -158,8 +179,6 @@ public class SistemaPrincipal {
         }
 
     }
-
- 
     public static void mostrarMenuCliente() {
         System.out.println("/********MENÚ********/");
         System.out.println("/*                  */");

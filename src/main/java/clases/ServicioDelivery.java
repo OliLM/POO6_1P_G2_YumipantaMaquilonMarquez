@@ -42,7 +42,6 @@ public class ServicioDelivery extends Servicio {
         String p_llegada_de = sc.nextLine();
         Ruta ruta_de = new Ruta(p_inicio_de, p_llegada_de);
         System.out.print("Ingrese el pedido: "); //Falta crear el pedido como objeto, y la clase restaurante y menú
-
         Servicio Delivery = new ServicioDelivery(ruta_de, fecha_de, "1234", "Williams restaurant");
         sc.close();
         return 0;

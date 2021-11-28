@@ -60,11 +60,11 @@ public class EntregaEncomienda extends Servicio {
         System.out.println("Ingrese la cantidad del producto enviado:");
         int cantidad = sc.nextInt();
         sc.nextLine();
-        Servicio encomienda = new EntregaEncomienda(ruta, fecha, cantidad, tipo);
-        String metodo = encomienda.metodo_pago();
+        String metodo = Servicio.metodo_pago();
         System.out.println("¿Desea generar el servicio? (si/no)");
         String confirmacion = sc.nextLine();
         if (confirmacion.equals("si")) {
+            Servicio encomienda = new EntregaEncomienda(ruta, fecha, cantidad, tipo);
             String tipoVehiculo = "M";
             String conductor = encomienda.asignarconductor(tipoVehiculo);
             String linea = encomienda.getCodigo() + "," + cliente_A.getNombre() + "," + conductor + "," + encomienda.getRuta().getpuntoPartida() + "," + encomienda.getRuta().getpuntoLlegada() + "," + encomienda.getfecha() + "," + hora + ","+tipo+","+cantidad+","+ metodo + "," + encomienda.getvalorPagar();
