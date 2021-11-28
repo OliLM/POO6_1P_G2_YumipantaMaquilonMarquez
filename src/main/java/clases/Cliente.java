@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *
  * @author ismael123
  */
-public class Cliente extends usuario{
+public class Cliente extends Usuario{
     private int edad;
     private int nro_tarjeta;
     private ArrayList<Servicio> listaServicio = new ArrayList();
@@ -48,8 +48,8 @@ public class Cliente extends usuario{
                 ServicioTaxi taxi=(ServicioTaxi)servi;
                 System.out.println("Servicio de Taxi\n"+taxi.toString()+"\n");
             }
-            if(servi instanceof EntregaEncomiendas){
-                EntregaEncomiendas enco=(EntregaEncomiendas)servi;
+            if(servi instanceof EntregaEncomienda){
+                EntregaEncomienda enco=(EntregaEncomienda)servi;
                 System.out.println("Servicio de Encomienda\n"+enco.toString()+"\n");
             }
             if(servi instanceof ServicioDelivery){
