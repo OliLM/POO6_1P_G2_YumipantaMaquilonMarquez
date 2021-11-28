@@ -32,7 +32,6 @@ public class ServicioDelivery extends Servicio {
     public String toString() {
         return "ServicioDelivery{" + "pedido=" + pedido + '}';
     }
-
     public static int crearServicioDelivery(Cliente c) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Ingrese la fecha: ");
