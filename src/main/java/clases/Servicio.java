@@ -70,6 +70,7 @@ public class Servicio {
     public String toString() {
         return ruta.toString() + "\nConductor: " + conductor + "\nFecha: " + fecha + "\nValor a pagar: " + valorPagar + "\nCodigo: " + codigo;
     }
+    //Metodo sobrecargado, se implementan en metodo_pago
     public static double calcularPrecio(double precio) {
         double precioFinal = precio;
         return precioFinal;
@@ -78,6 +79,7 @@ public class Servicio {
         double precioFinal = precio*incremento;
         return precioFinal;
     }
+    //Metodo usado para calcular el precio y definir el tipo de pago (efectivo/trajeta)
     public static String metodo_pago(){
         String metodo="";
         double valor=0;
@@ -110,7 +112,7 @@ public class Servicio {
         valorPagar=valor;
         return metodo;
     }
-    
+    //Forma alterna para calcular el precio del servicio(para explorar opciones)
     public double calcularTotalServicios(String pago, double subtotal){
         double total=subtotal;
         if(pago.equals("Tarjeta de credito")){
@@ -120,7 +122,7 @@ public class Servicio {
         return total;
     }
     
-    
+    //Asigna un conductor a los servicios
     public String asignarconductor(String tipoVehiculo){
         String conductor="";
         

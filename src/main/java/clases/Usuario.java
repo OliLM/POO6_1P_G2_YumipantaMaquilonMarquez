@@ -95,7 +95,7 @@ public class Usuario {
         System.out.println("/*                  */");
         System.out.println("/********************/");
     }
-    
+    //Este metodo se debe sobreescribir
    public int ConsultarServicioAsignado(){
        return 1;
    }

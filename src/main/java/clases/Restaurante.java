@@ -57,7 +57,7 @@ public class Restaurante {
     public String toString() {
         return "Restaurante{" + "nombre=" + nombre + ", codigo=" + codigo + ", listamenu=" + listamenu + '}';
     }
-
+    //Crea los menus que seran vistos por los usuarios cunado tomen la opcion 3
     public static ArrayList<Plato> crearMenu(String nombreArchivo, Restaurante restaurante) {
         File archivo = null;
         FileReader fr = null;
@@ -98,7 +98,7 @@ public class Restaurante {
         }
         return restaurante.getListamenu();
     }
-
+    //crea los objetos restaurantes que permitiran mostrar sus menus
     public static ArrayList<Restaurante> crearRestaurante(String nombrearchivo) {
         ArrayList<Restaurante> l_restaurante = new ArrayList<>();
         File archivo = null;

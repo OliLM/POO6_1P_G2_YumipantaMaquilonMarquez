@@ -27,6 +27,8 @@ public class ServicioTaxi extends Servicio {
     public void setcantidadPersonas(int cantidadPersonas) {
         this.cantidadPersonas = cantidadPersonas;
     }
+    
+    //Se encuentra en el case 1 y permite crear el servicio taxi si el cliente lo solicita
     public static int crearServicioTaxi(Cliente cliente_A) {
         int validarWhile=0;
         Scanner sc = new Scanner(System.in);
@@ -45,6 +47,8 @@ public class ServicioTaxi extends Servicio {
         System.out.println("Desea generar el servicio (si/no)");
         String confirmacion = sc.nextLine();
         String confi = confirmacion.toLowerCase();
+        
+        //Si el cliente confirma se genera el servicio
         if (confirmacion.equals("si")) {
              ServicioTaxi taxi = new ServicioTaxi(ruta, fecha, personas);
             String tipoVehiculo="A";

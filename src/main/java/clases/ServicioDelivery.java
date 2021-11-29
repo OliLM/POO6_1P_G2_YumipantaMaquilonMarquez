@@ -112,7 +112,7 @@ public class ServicioDelivery extends Servicio {
             Archivos.EscribirArchivo("delivery.txt", linea);
             String lineaPedido = pedido.getcodigo() + "," + "5657" + "," + conductor +","+"sdssddss";
             Archivos.EscribirArchivo("pedido.txt", lineaPedido);
-            System.out.println("Factura :\n" + Delivery.toString());
+            System.out.println("**=============Factura=============**\n"+ Delivery.toString());
 
             System.out.println("¿Desea Solicitar otro Servicio? (si/no): ");
             String validar = sc.nextLine();

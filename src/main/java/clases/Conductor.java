@@ -56,6 +56,7 @@ public class Conductor extends Usuario {
     }
 
     @Override
+    //Metodo sobreescrito para el conductor
     public int ConsultarServicioAsignado() {
         Scanner sc = new Scanner(System.in);
         int validarWhile = 1;
@@ -92,6 +93,7 @@ public class Conductor extends Usuario {
     public String toString() {
         return super.toString() + "[ Licencia: " + getLicencia() + " Estado: " + getEstado() + " Vehiculo: " + getVehiculo() + "]";
     }
+    //Lee los archivos de servicios para luego asignarle los servicios al conductor
     private void leerArchivoServicio() {
         String informacion = "";
         File archivo = null;
@@ -121,6 +123,11 @@ public class Conductor extends Usuario {
                             if(nombreArchivo.equals("encomiendas.txt")){
                                String Servicio="Usted Tiene asignado el servicio de encomienda: \nTipo de encomienda: "+datos[7]+"\nCantidad: "+datos[8]+"\nFecha: "+datos[5]+"\nHora "+datos[6]+"\nDesde: "+datos[3]+"\nHasta: "+datos[4];
                                serviciosAsignados.add(Servicio);
+                            }
+                            if(nombreArchivo.equals("delivery.txt")){
+                                String Servicio="Usted Tiene asignado el servicio de encomienda: \nTipo de encomienda: "+"\nFecha: "+datos[5]+"\nHora "+datos[6]+"\nDesde: "+datos[3]+"\nHasta: "+datos[4];
+                                serviciosAsignados.add(Servicio);
+                                
                             }
                             
                                 

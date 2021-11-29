@@ -154,7 +154,5 @@ public class Archivos {
     }
     //retorna el tipo de vehiculo
    
-    
-    
 
 }
