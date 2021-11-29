@@ -5,17 +5,21 @@
  */
 package clases;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author DELL
  */
 public class Pedido {
-    protected String codigo;
-    protected String nombre;
+    private String codigo;
+    private String nombre;
+    private ArrayList<Plato> carrito;
     
     public Pedido(String nombre){
         this.codigo=String.valueOf((int)(Math.random()*1000000));;
         this.nombre=nombre;
+        this.carrito= new ArrayList<>();
     }
     
     public String getcodigo(){
@@ -24,6 +28,15 @@ public class Pedido {
     public void setcodigo(String codigo){
         this.codigo=codigo;
     }
+
+    public ArrayList<Plato> getCarrito() {
+        return carrito;
+    }
+
+    public void setCarrito(ArrayList<Plato> carrito) {
+        this.carrito = carrito;
+    }
+    
     
     public String getnombre(){
         return nombre;
@@ -31,5 +44,12 @@ public class Pedido {
     public void setnombre(String nombre){
         this.nombre=nombre;
     }
+
+    @Override
+    public String toString() {
+        return "\ncodigo: "+codigo+"\nnombre: "+ nombre+"\nSu pedido: " + carrito;
+    }
+    
+    
             
 }

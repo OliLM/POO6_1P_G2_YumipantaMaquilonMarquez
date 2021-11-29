@@ -58,13 +58,14 @@ public class EntregaEncomienda extends Servicio {
         String hora = sc.nextLine();
         TipoEncomienda tipo=tipoEncomienda();
         System.out.println("Ingrese la cantidad del producto enviado:");
-        int cantidad = sc.nextInt();
+        int cantidad = SistemaPrincipal.pedirDatosEnteros();
         sc.nextLine();
-        Servicio encomienda = new EntregaEncomienda(ruta, fecha, cantidad, tipo);
-        String metodo = encomienda.metodo_pago();
+        String metodo = Servicio.metodo_pago();
         System.out.println("¿Desea generar el servicio? (si/no)");
         String confirmacion = sc.nextLine();
-        if (confirmacion.equals("si")) {
+        String confir=confirmacion.toLowerCase();
+        if (confir.equals("si")) {
+            Servicio encomienda = new EntregaEncomienda(ruta, fecha, cantidad, tipo);
             String tipoVehiculo = "M";
             String conductor = encomienda.asignarconductor(tipoVehiculo);
             String linea = encomienda.getCodigo() + "," + cliente_A.getNombre() + "," + conductor + "," + encomienda.getRuta().getpuntoPartida() + "," + encomienda.getRuta().getpuntoLlegada() + "," + encomienda.getfecha() + "," + hora + ","+tipo+","+cantidad+","+ metodo + "," + encomienda.getvalorPagar();
@@ -74,6 +75,7 @@ public class EntregaEncomienda extends Servicio {
             cliente_A.setListaServicio(enco);
             System.out.println("¿Desea Solicitar otro Servicio? (si/no): ");
             String validar = sc.nextLine();
+            String vali = validar.toLowerCase();
             if (validar.equals("si")) {
                 validarWhile = 1;
             } else if (validar.equals("no")) {
@@ -93,7 +95,7 @@ public class EntregaEncomienda extends Servicio {
         TipoEncomienda tipo = TipoEncomienda.MEDICAMENTOS;
         while (ingreso != 0) {
             System.out.println("Seleccione una opcion\n1.Medicamentos\n2.Documentos\n3.Ropa\nIngrese su opcion:");
-            int op = sc.nextInt();
+            int op = SistemaPrincipal.pedirDatosEnteros();
             sc.nextLine();
             switch (op) {
                 case 1:

@@ -19,12 +19,16 @@ import java.util.ArrayList;
  */
 public class SistemaPrincipal {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //=============  Inicio============
         Archivos.EscribirArchivo("conductoresApp.txt", "nombre,codigoUsuario,licencia,estado,codigoVehiculo\nAlex,2739,238983,D,23\nJuan,3847,293487,D,12\nPedro,3474,828737,D,15");
         Archivos.EscribirArchivo("vehiculo.txt", "codigoVehiculo,placa,modelo,marca,tipo\n23,GSX3847,CX3,Mazda,A\n12,GSD8475,Aveo,Cherolet,A\n15,GAF9833,I10,Hyundai,M");
         Archivos.EscribirArchivo("viajes.txt", "numeroServicio,nombreCliente,nombreConductor,desde,hasta,fecha,hora,numeroPasajeros,tipoPago,valorPagar");
         Archivos.EscribirArchivo("encomiendas.txt", "numeroServicio,nombreCliente,nombreConductor,desde,hasta,fecha,hora,tipoEncomienda,cantidadProductos,tipoPago,valorPagar");
+        Archivos.EscribirArchivo("restaurantes.txt","codigoRestaurante,nombreRestaurante\n678,Mc Donals\n875,Naturissimo\n736,Sweet and Coffee\n822,Cafe de Tere");
+        Archivos.EscribirArchivo("menus.txt","codigoRestaurate,nombrePlato,precio\n678,mc bacon combo,4.82\n678,mc nuggets combo,6.00\n678,mc flurry frutilla,1.90\n678,mc flurry manjar,1.90\n678,mc flurry chocolate,1.90\n678,papas fritas,1.50\n875,combo 1,3.50\n875,combo 2,5.60\n875,combo 3,6.70\n736,porcion tres leches,4.50\n736,milkshake oreo,3.90\n736,porcion torta de chocolate,2.50\n822,Bolón mixto,5.00");
+        Archivos.EscribirArchivo("delivery.txt","numeroServicio,nombreCliente,nombreCondu,desde,desde,hasta,fecha,hora,numeroPedido,tipoPago,valorPagar");
+        Archivos.EscribirArchivo("pedido.txt","numeroPedido,codigoRestaurante,nombrePlato,precio");
         //=============== Fin ===============
         boolean validar = false;
         Scanner sc = new Scanner(System.in);
@@ -49,17 +53,22 @@ public class SistemaPrincipal {
                         int edad = sc.nextInt();
                         System.out.println("Ingres el numero de tarjeta de credito");
                         String tarjeta = sc.next();
-                        Cliente.registrar_cliente(edad, tarjeta, User.getNro_cedula(), "Clientes.txt");
+                        Cliente.registrar_cliente(edad, tarjeta, User.getNro_cedula(), "Clientes.txt");                  
                     }
                     System.out.println("Cliente registrado");
                     Cliente cliente_A = (Cliente) User;//Down casting
-
                     int validarWhile = 1;
+//                    
                     while (validarWhile != 0) {
+                        
+
                         mostrarMenuCliente();
-                        System.out.println("Ingrese su opcion: ");
-                        int op = sc.nextInt();
-                        sc.nextLine();
+//                        System.out.println("escoja una op:");
+//                        int op=sc.nextInt();
+//                        sc.nextLine();
+                        System.out.println("Escoja una opcion:");
+                        int op=pedirDatosEnteros();
+//                        cliente_A.mostrarMenu();
 
                         switch (op) {
                             case 1:
@@ -74,13 +83,12 @@ public class SistemaPrincipal {
                                 break;
                             case 3:
                                 System.out.println("/********SERVICIO DELIVERY COMIDA********/");
-                                ServicioDelivery.crearServicioDelivery(cliente_A);
-                                validarWhile = 0;
+                                validarWhile = ServicioDelivery.crearServicioDelivery(cliente_A);
+                                
                                 break;
                             case 4:
                                 System.out.println("/********CONSULTAR SERVICIO********/");
                                 validarWhile = cliente_A.ConsultarServicioAsignado();
-
                                 break;
                             default:
                                 System.out.print("Opcion no valida. Vuelva a seleccionar.");
@@ -95,7 +103,7 @@ public class SistemaPrincipal {
                     int validarWhile = 1;
                     while (validarWhile != 0) {
 
-                        mostrarMenuConductor();
+                        conductor_A.mostrarMenu();
                         System.out.println("Ingrese su opcion: ");
                         int op = sc.nextInt();
                         sc.nextLine();
@@ -118,6 +126,27 @@ public class SistemaPrincipal {
 
     public static boolean validardatos(String datos) {
         return datos.matches("[a-zA-z]*");
+    }
+    private static boolean validardatosEnteros(String datos){
+        int n=0; 
+        boolean validar= datos.matches("[0-9]"); 
+return validar;        
+    }
+    public static int pedirDatosEnteros(){
+        int n=0;
+        Scanner sc=new Scanner(System.in);
+        while(n==0){
+//             System.out.println("Ingrese el numero");
+          String ops=sc.next();
+            if(validardatosEnteros(ops)==false){
+             System.out.println("debe ingresar datos validos");
+            }else{
+                n=Integer.parseInt(ops);  
+            }   
+            
+        } 
+        
+       return n; 
     }
     private static boolean IngresoSistema(String user, String contraseña, String nombrearchivo) {
         boolean encontrado = false;
@@ -158,8 +187,6 @@ public class SistemaPrincipal {
         }
 
     }
-
- 
     public static void mostrarMenuCliente() {
         System.out.println("/********MENÚ********/");
         System.out.println("/*                  */");
@@ -175,6 +202,12 @@ public class SistemaPrincipal {
         System.out.println("/********************/");
         System.out.println("1. Consultar servicio asignado");
     }
+
+
+ 
+
+
+
     public static Usuario Crear_usuario(String nombrearchivo, String User) {
         File archivo = null;
         FileReader fr = null;
@@ -195,7 +228,7 @@ public class SistemaPrincipal {
                 if (User.equals(datos[3])) {
                     if (datos[6].charAt(0) == 'R') {
 
-                        //=============  Inicio============
+                       
                         String info = Conductor.licenciaEstado("conductoresApp.txt", datos[1]);
                         String[] licenciaEstado = info.split(",");
                         if (licenciaEstado[1].equals("D")) {
@@ -214,7 +247,7 @@ public class SistemaPrincipal {
                         //Polimorfismo de asignacion
                         user_final = conductor;
 
-                        //=============== Fin ===============
+                        
                     } else {
                         Cliente cliente = new Cliente(datos[1], datos[2], datos[0], datos[5], datos[3], datos[4], 25, 56561561, datos[6].charAt(0));
                         //Polimorfismo de asignacion

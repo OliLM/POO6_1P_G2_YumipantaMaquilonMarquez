@@ -89,6 +89,13 @@ public class Usuario {
         this.contraseña = contraseña;
     }
    
+    
+    public void mostrarMenu(){
+        System.out.println("/********MENÚ********/");
+        System.out.println("/*                  */");
+        System.out.println("/********************/");
+    }
+    
    public int ConsultarServicioAsignado(){
        return 1;
    }

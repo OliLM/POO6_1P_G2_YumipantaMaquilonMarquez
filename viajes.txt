@@ -1,1 +1,3 @@
 numeroServicio,nombreCliente,nombreConductor,desde,hasta,fecha,hora,numeroPasajeros,tipoPago,valorPagar
+93388,Luis,Juan,urdesa,motecayo,12/22/12013,10:20,5,Pago en efectivo,0.22636696320123395
+numeroServicio,nombreCliente,nombreConductor,desde,hasta,fecha,hora,numeroPasajeros,tipoPago,valorPagar
